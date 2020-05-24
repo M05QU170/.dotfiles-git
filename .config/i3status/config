@@ -1,0 +1,87 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+general {
+        colors = true
+        interval = 5
+}
+
+#order += "battery all"
+#order += "disk /"
+order += "wireless wlp2s0"
+order += "battery 0"
+order += "cpu_usage"
+#order += "load"
+order += "memory"
+order += "tztime local"
+order += "volume master"
+
+wireless wlp2s0 {
+                   format_up = "W:(%quality at %essid, %bitrate) %ip"
+                   format_down = "W: down"
+                   color_bad = "#bf616a"
+                   color_degraded = "#d08770"
+                   color_good = "#a3be8c"
+           }
+
+
+battery all {
+        format = "%status %percentage %remaining"
+}
+
+battery 0 {
+                   format = "%status %percentage %remaining %emptytime"
+                   format_down = "No battery"
+                   status_chr = "⚡ CHR"
+                   status_bat = "🔋 BAT"
+                   status_unk = "? UNK"
+                   status_full = "☻ FULL"
+                   path = "/sys/class/power_supply/BAT%d/uevent"
+                   low_threshold = 10
+           }
+
+disk "/" {
+        format = "%avail"
+}
+
+load {
+        format = "LOAD:%1min"
+		color_bad = "#bf616a"
+		color_degraded = "#d08770"
+		color_good = "#a3be8c"
+}
+
+memory {
+        format = "MEM %used" #%available"
+        threshold_degraded = "1G"
+        format_degraded = "MEMORY < %available"
+        color_bad = "#bf616a"
+		color_degraded = "#d08770"
+		color_good = "#a3be8c"
+}
+
+cpu_usage {
+
+		format = "CPU:%usage" #"%usage CPU1: %cpu0 CPU2: %cpu1 CPU3: %cpu2 CPU4: %cpu3"
+		max_threshold = "75"
+		format_above_threshold = "Warning above threshold: %usage"
+		degraded_threshold = "25"
+		color_bad = "#bf616a"
+		color_degraded = "#d08770"
+		color_good = "#a3be8c"
+
+}
+
+           volume master {
+                   format = "♪:%volume"
+                   format_muted = "♪:muted (%volume)"
+                   device = "pulse:alsa_output.pci-0000_00_1f.3.analog-stereo"
+                   		color_bad = "#bf616a"
+		color_degraded = "#d08770"
+		color_good = "#a3be8c"
+           }
+
+
+tztime local {
+        format = "%a %d %b, %H:%M"
+}
