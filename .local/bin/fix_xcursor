@@ -10,7 +10,7 @@ gtk3=$HOME/.config/gtk-3.0/settings.ini
 # we'll have to override libxcursor's default
 default=share/icons/default/index.theme
 glob_default=/usr/$default
-user_default=$HOME/.local/$default
+user_default=$HOME/.icons/default/index.theme
 [[ -e $glob_default ]] && [[ ! -e $user_default ]] && install -D $glob_default $user_default 
 
 # cursor-theme entries
@@ -34,7 +34,7 @@ echo $cursor | sed -e 's/"//g'
 echo "setting cursortheme \"$cursor\""
 [[ "$cursor" != "$cursor_xr" ]] && \
 	sed -i "s/Xcursor.theme:.*/Xcursor.theme: $cursor/g" $xr &>/dev/null && \
-	xrdb -merge -I$HOME ~/.Xresources
+	xrdb -merge -I $HOME ~/.Xresources
 [[ "$cursor" != "$cursor_gtk2" ]] && \
 	sed -i "s/cursor-theme-name=\".*\"/cursor-theme-name=\"$cursor\"/" $gtk2
 [[ "$cursor" != "$cursor_gtk3" ]] && \
