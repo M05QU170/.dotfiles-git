@@ -1,0 +1,24 @@
+#!/bin/sh
+
+
+export GTK2_RC_FILES=$HOME/.gtkrc-2.0
+#export XDG_CONFIG_HOME="$HOME/.config"
+#export PATH="$HOME/.local/bin:$PATH"
+
+xset dpms 600 900 1200
+xset r rate 350 60
+
+#picom -b &
+#nm-applet &
+#xfce4-power-manager &
+#redshift-gtk &
+#nitrogen --restore &
+#setxkbmap -layout gb &
+#pamac-tray &
+#volumeicon &
+#xfsettingsd &
+#xfce4-volumed-pulse &
+#/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+#gnome-keyring-daemon --start --components=pkcs11 &
+#ksuperkey -e 'Super_L=Alt_L|F1'
+#ksuperkey -e 'Super_R=Alt_L|F1'
