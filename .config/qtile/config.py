@@ -277,17 +277,16 @@ screens = [
                        # execute = "termite",
                        # mouse_callbacks = {},
                        # update_interval = 60,
+                       # foreground = 'A3BE8C',
+                       # unavailable = 'D08770',
                        # ),
                 widget.CheckUpdates(
 						colour_have_updates = "A3BE8C",
 						#colour_no_updates = 'D08770',
-						
-						execute = "alacritty",
+						execute = "termite",
 						custom_command = '-e sudo pacman -Syyu',
 						update_interval = 600,
 						display_format = '{updates}'
-						
-						
 						),
 				widget.Sep(
                         linewidth = 1,
