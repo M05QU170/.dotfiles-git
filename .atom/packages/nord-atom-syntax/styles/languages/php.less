@@ -1,0 +1,50 @@
+/*
+ * Copyright (C) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+ * Copyright (C) 2016-present Sven Greb <development@svengreb.de>
+ *
+ * Project:    Nord Atom Syntax
+ * Repository: https://github.com/arcticicestudio/nord-atom-syntax
+ * License:    MIT
+ * References:
+ *   https://atom.io/packages/language-php
+ *   https://secure.php.net
+ *   https://laravel.com/docs/blade
+ */
+
+.syntax--source.syntax--php {
+  .syntax--meta {
+    &.syntax--function-call {
+      color: @syntax-color-function;
+
+      &.syntax--static {
+        font-style: italic;
+      }
+    }
+
+    &.syntax--string-contents {
+      color: @syntax-color-string;
+    }
+  }
+
+  .syntax--punctuation.syntax--definition.syntax--variable {
+    color: @syntax-color-keyword;
+  }
+
+  .syntax--support.syntax--other.syntax--namespace.syntax--use {
+    color: @syntax-color-class;
+  }
+}
+
+.syntax--text.syntax--html.syntax--php.syntax--blade {
+  .syntax--keyword {
+    color: @syntax-color-annotation;
+
+    &.syntax--operator {
+      color: @syntax-color-operator;
+    }
+  }
+
+  .syntax--support.syntax--function.syntax--construct {
+    color: @syntax-color-tag-template;
+  }
+}

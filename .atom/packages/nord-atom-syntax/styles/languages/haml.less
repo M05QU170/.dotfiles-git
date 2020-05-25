@@ -1,0 +1,38 @@
+/*
+ * Copyright (C) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+ * Copyright (C) 2016-present Sven Greb <development@svengreb.de>
+ *
+ * Project:    Nord Atom Syntax
+ * Repository: https://github.com/arcticicestudio/nord-atom-syntax
+ * License:    MIT
+ * References:
+ *   https://atom.io/packages/language-haml
+ *   http://haml.info
+ */
+
+.syntax--text.syntax--haml {
+  .syntax--meta {
+    &.syntax--prolog {
+      color: @syntax-color-preprocessor;
+    }
+
+    &.syntax--section.syntax--object {
+      color: @syntax-color-class;
+    }
+  }
+
+  .syntax--punctuation.syntax--definition {
+    &.syntax--prolog {
+      color: @syntax-color-keyword;
+    }
+
+    &.syntax--tag {
+      color: @syntax-color-tag;
+    }
+  }
+
+  .syntax--variable.syntax--other.syntax--instance {
+    color: @syntax-color-variable;
+    font-style: italic;
+  }
+}

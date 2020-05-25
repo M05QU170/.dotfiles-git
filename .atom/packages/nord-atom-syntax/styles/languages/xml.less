@@ -1,0 +1,33 @@
+/*
+ * Copyright (C) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+ * Copyright (C) 2016-present Sven Greb <development@svengreb.de>
+ *
+ * Project:    Nord Atom Syntax
+ * Repository: https://github.com/arcticicestudio/nord-atom-syntax
+ * License:    MIT
+ * References:
+ *   https://atom.io/packages/language-xml
+ *   https://www.w3.org/TR/xml
+ */
+
+.syntax--text.syntax--xml {
+  .syntax--constant.syntax--character {
+    &.syntax--entity,
+    .syntax--punctuation.syntax--definition {
+      color: @syntax-color-markup-entity;
+    }
+  }
+
+  .syntax--entity.syntax--name.syntax--tag.syntax--namespace {
+    color: @syntax-color-attribute;
+  }
+
+  .syntax--string.syntax--unquoted.syntax--cdata {
+    color: @syntax-color-comment;
+
+    .syntax--punctuation.syntax--definition {
+      color: @syntax-color-comment;
+      font-weight: bold;
+    }
+  }
+}

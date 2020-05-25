@@ -1,0 +1,36 @@
+/*
+ * Copyright (C) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
+ * Copyright (C) 2016-present Sven Greb <development@svengreb.de>
+ *
+ * Project:    Nord Atom Syntax
+ * Repository: https://github.com/arcticicestudio/nord-atom-syntax
+ * License:    MIT
+ * References:
+ *   https://atom.io/packages/language-c
+ *   https://isocpp.org
+ */
+
+.syntax--source.syntax--c,
+.syntax--source.syntax--cpp {
+  .syntax--keyword.syntax--operator {
+    color: @syntax-color-keyword;
+  }
+
+  .syntax--meta.syntax--preprocessor {
+    color: @syntax-color-preprocessor;
+  }
+
+  .syntax--punctuation {
+    &.syntax--definition.syntax--directive {
+      color: @syntax-color-keyword;
+    }
+
+    &.syntax--separator.syntax--pointer-access {
+      color: @syntax-color-operator;
+    }
+  }
+
+  .syntax--string.syntax--include {
+    color: @syntax-color-class;
+  }
+}

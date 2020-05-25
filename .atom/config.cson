@@ -1,0 +1,8 @@
+"*":
+  core:
+    themes: [
+      "nord-atom-ui"
+      "nord-atom-syntax"
+    ]
+  "exception-reporting":
+    userId: "b7149589-3155-4168-89f4-bab4a0759798"
