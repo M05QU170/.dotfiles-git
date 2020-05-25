@@ -1,6 +1,6 @@
 #!/bin/sh
 
-fix_xcursor &
+#fix_xcursor &
 picom -b &
 nm-applet &
 blueman-tray &

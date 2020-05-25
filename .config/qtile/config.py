@@ -273,21 +273,20 @@ screens = [
 						# linewidth = 1,
 						# padding = 5,
 						# ),
-				# widget.Pacman(
-                       # execute = "termite",
-                       # mouse_callbacks = {},
-                       # update_interval = 60,
-                       # foreground = 'A3BE8C',
-                       # unavailable = 'D08770',
-                       # ),
-                widget.CheckUpdates(
-						colour_have_updates = "A3BE8C",
-						#colour_no_updates = 'D08770',
-						execute = "termite",
-						custom_command = '-e sudo pacman -Syyu',
-						update_interval = 600,
-						display_format = '{updates}'
-						),
+				widget.Pacman(
+                       execute = "termite",
+                       update_interval = 600,
+                       #foreground = 'A3BE8C',
+                       #unavailable = 'D08770',
+                       ),
+                # widget.CheckUpdates(
+						# colour_have_updates = 'D08770',#"A3BE8C",
+						# #custom_command = 'sudo pacman -Syyu',
+						# execute = "termite",
+						# update_interval = 600,
+						# display_format = '{updates}'
+						# #colour_no_updates = 'D08770',
+						# ),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
