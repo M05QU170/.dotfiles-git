@@ -84,7 +84,7 @@ bindsym $Mod+Shift+q kill
 bindsym Mod1+F4 kill
 
 # launchers
-bindsym $Mod+r exec --no-startup-id rofi_run -r
+bindsym $Mod+r exec --no-startup-id rofi_run -d
 
 # core
 #bindsym $Mod+w          exec --no-startup-id exo-open --launch WebBrowser
@@ -96,7 +96,7 @@ bindsym $Mod+Return     exec --no-startup-id termite
 # logout script
 bindsym $Mod+x exec --no-startup-id rofi_run -l
 
-# dmenu, config for dmenu_receny sits at ~/.dmenurc
+# dmenu. config for dmenu_receny sits at ~/.dmenurc
 
 bindsym $Mod+d exec --no-startup-id dmenu_recency #dmenu_run -fn 'Noto-11' -sb '#5E81AC' -sf '#eceff4' -nb '#2e3440' -nf '#D8DEE9'
 
