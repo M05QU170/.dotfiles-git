@@ -97,8 +97,7 @@ bindsym Mod1+F4 kill
 
 # launchers
 #bindsym $Mod+r exec --no-startup-id rofi_run -d
-bindsym $Mod+r exec --no-startup-id rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal termite
-
+bindsym $Mod+r exec --no-startup-id "rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal termite"
 # core
 #bindsym $Mod+w          exec --no-startup-id exo-open --launch WebBrowser
 #bindsym $Mod+f          exec --no-startup-id exo-open --launch FileManager
