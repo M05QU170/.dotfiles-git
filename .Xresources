@@ -61,6 +61,7 @@
 *.color14: nord7
 *.color15: nord6
 
+!archlabs theme
 ! Rofi
 !rofi.font: monospace 12
 !rofi.padding: 20
@@ -73,6 +74,20 @@
 !rofi.color-urgent: argb:00000000, #f43753, argb:00000000, argb:00000000, #e29a49
 !rofi.color-active: argb:00000000, #49bbfb, argb:00000000, argb:00000000, #e29a49
 !rofi.kb-cancel: Escape,Alt+F1
+
+!mytheme
+! Rofi
+rofi.font: monospace 12
+rofi.padding: 20
+rofi.line-padding: 2
+rofi.color-enabled: true
+rofi.hide-scrollbar: true
+rofi.separator-style: solide
+rofi.color-window: #2e3440, #5e81ac, #2e3440
+rofi.color-normal: #2e3440, #d8dee9, #2e3440, #5e81ac, #eceff4
+rofi.color-urgent: argb:00000000, #bf616a, argb:00000000, argb:00000000, #d08770
+rofi.color-active: argb:00000000, #ebcb8b, argb:00000000, argb:00000000, #a3be8c
+rofi.kb-cancel: Escape,Alt+F1
 
 ! xterm
 xterm*termName: xterm-256color
