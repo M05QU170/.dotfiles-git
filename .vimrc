@@ -11,7 +11,6 @@
 runtime! archlinux.vim
 
 
-execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
@@ -19,11 +18,19 @@ call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
-Plug 'mhinz/vim-startify'
-" :colorscheme autumn 
-" :colorscheme nord
-" :colorscheme relaxedgreen
-" ::colorscheme robcolors
+" Plug 'vim-airline/vim-airline-themes'
+" Plug 'mhinz/vim-startify'
+Plug 'itchyny/lightline.vim'
+
+call plug#end()
+
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ }
+
+:colorscheme nord 
+
+set number
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
 " Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
 " and configure vim to your own liking!
