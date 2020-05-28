@@ -1,7 +1,8 @@
 # ArchLabs i3 config
 
 # border & title
-#for_window [class="^.*"] border pixel 1, title_format "<b> %class >> %title </b>"
+for_window [class="^.*"] border pixel 3, title_format "<b> %class >> %title </b>"
+
 
 # gaps
 gaps inner 8
@@ -46,7 +47,7 @@ bar {
         focused_workspace  #5E81AC #5E81AC #eceff4
         active_workspace   #4c566a #2e3440 #D8DEE9
         inactive_workspace #4c566a #2e3440 #D8DEE9
-        binding_mode       #4c566a #2e3440 #D8DEE9
+        #binding_mode       #4c566a #2e3440 #D8DEE9
         urgent_workspace   #bf616a #bf616a #eceff4
     }
 }
