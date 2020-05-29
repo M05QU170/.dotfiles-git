@@ -13,8 +13,8 @@ gaps inner 5
 gaps outer 5
 
 # font
-#font pango:monospace 11
-font Hack 11.5
+font pango:monospace 12
+#font pango:Hack 12
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -39,7 +39,7 @@ exec_always --no-startup-id xrdb -load ~/.Xresources
 
 
 #set $term alacritty
-set $term gnome-terminal
+set $term kitty
 
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
@@ -115,29 +115,38 @@ output * bg /usr/share/wallpapers/default-1920x1080.jpg fill
 # Basics:
 #
 
+
+	bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+	bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+	bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+	
+	
 	# audio
 	#bindsym XF86AudioPlay        exec --no-startup-id playerctl play-pause
 	#bindsym XF86AudioNext        exec --no-startup-id playerctl next
 	#bindsym XF86AudioPrev        exec --no-startup-id playerctl previous
 	#bindsym XF86AudioStop        exec --no-startup-id playerctl stop
 
-	bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-	bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-	bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+#	bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5%
+#	bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5%
+#	bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 	
 #	#bindsym XF86AudioMute        exec --no-startup-id pamixer -t
 #	#bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 2
 #	#bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 2
 
 	# Brightness
-	bindsym XF86MonBrightnessUp exec brightnessctl set +10%
-	bindsym XF86MonBrightnessDown exec brightnessctl set 10%-
+	bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+	bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
-	# Screenshot
-	bindsym Print exec --no-startup-id "grim ~/Pictures/$(date '+%Y-%m-%d-%T')-screenshot.png"
+#	# Screenshot
+#	bindsym Print exec --no-startup-id "grim ~/Pictures/$(date '+%Y-%m-%d-%T')-screenshot.png"
+#	# Screenshot everything, focused workspace and selected region
+	bindsym Print exec grim "$HOME/Pictures/$(date '+%Y-%m-%d-%T')-screenshot"
+	bindsym Shift+Print exec grim -g "$(slurp)"
 
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec kitty
 
     # Kill focused window
     bindsym $mod+Shift+q kill
@@ -315,7 +324,7 @@ bar {
 	swaybar_command swaybar
 	position top
 
-	#status_command while date +'%a %d %b, %H:%M'; do sleep 1; done
+#	#status_command while date +'%a %d %b, %H:%M'; do sleep 1; done
 	
 	status_command while ~/.config/sway/sway-scripts/sway_bar.sh; do sleep 1; done
 	
@@ -335,15 +344,13 @@ bar {
     }
 }
 
-# Theme colors for windows
-# class                   border  backgr. text    indic.   child_border
-  client.focused          #5E81AC #5E81AC #eceff4 #268BD2
-  client.focused_inactive #4C566A #4C566A #D8DEE9 #D8DEE9
-  client.unfocused        #4C566A #4C566A #D8DEE9 #D8DEE9
-  client.urgent           #BF616A #BF616A #eceff4 #268BD2
-  client.placeholder      #0000h00 #0c0c0c #ffffff #000000 
+#bar { 
 
-  #client.background       #2B2C2B
+#    swaybar_command waybar
+
+#}
+
+
   
   
 
