@@ -17,18 +17,26 @@ filetype plugin indent on
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
-Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'mhinz/vim-startify'
+"Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline-themes'
 Plug 'itchyny/lightline.vim'
+Plug 'dracula/vim'
 
 call plug#end()
 
+set noshowmode
+
+set laststatus=2
+
+"if !has('gui_running')
+"	  set t_Co=256
+"  endif
+
 let g:lightline = {
-      \ 'colorscheme': 'dracula',
+      \ 'colorscheme': 'atlas',
       \ }
 
-:colorscheme dracula
+:colorscheme atlas 
 
 set number
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
@@ -37,3 +45,5 @@ set number
 
 " do not load defaults if ~/.vimrc is missing
 "let skip_defaults_vim=1
+
+
