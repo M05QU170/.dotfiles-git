@@ -9,7 +9,7 @@ gaps inner 8
 gaps outer 0
 
 # font
-font pango:monospace 11
+font pango:monospace 11.5
 
 # mod key used for most binds
 # Mod1 = Alt
@@ -21,47 +21,6 @@ set $up l
 set $down k
 set $left j
 set $right semicolon
-
-###############        Bar         ##################
-bar {
-	i3bar_command i3bar
-	status_command i3status
-	position top
-
-## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
-#	tray_output primary
-#	tray_output eDP1
-
-	bindsym button4 nop
-	bindsym button5 nop
-	strip_workspace_numbers yes
-
-    colors {
-        background #2e3440
-        statusline #eceff4
-        separator  #D8DEE9
-
-        
-
-#                      border  backgr. text
-        focused_workspace  #5E81AC #5E81AC #eceff4
-        active_workspace   #4c566a #2e3440 #D8DEE9
-        inactive_workspace #4c566a #2e3440 #D8DEE9
-        #binding_mode       #4c566a #2e3440 #D8DEE9
-        urgent_workspace   #bf616a #bf616a #eceff4
-    }
-}
-
-# Theme colors for windows
-# class                   border  backgr. text    indic.   child_border
-  client.focused          #5E81AC #5E81AC #eceff4 #268BD2
-  client.focused_inactive #4C566A #4C566A #D8DEE9 #D8DEE9
-  client.unfocused        #4C566A #4C566A #D8DEE9 #D8DEE9
-  client.urgent           #BF616A #BF616A #eceff4 #268BD2
-  client.placeholder      #000000 #0c0c0c #ffffff #000000 
-
-  #client.background       #2B2C2B
-
 
 
 ###############     Autostart      ##################
@@ -98,12 +57,12 @@ bindsym Mod1+F4 kill
 
 # launchers
 #bindsym $Mod+r exec --no-startup-id rofi_run -d
-bindsym $Mod+r exec --no-startup-id "rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal termite"
+bindsym $Mod+r exec --no-startup-id "rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal alacritty"
 # core
 #bindsym $Mod+w          exec --no-startup-id exo-open --launch WebBrowser
 #bindsym $Mod+f          exec --no-startup-id exo-open --launch FileManager
 #bindsym $Mod+t          exec --no-startup-id exo-open --launch TerminalEmulator
-bindsym $Mod+Return     exec --no-startup-id termite
+bindsym $Mod+Return     exec --no-startup-id alacritty
 #bindsym Control+Shift+t exec --no-startup-id exo-open --launch TerminalEmulator
 
 # logout script
@@ -297,4 +256,46 @@ for_window [title="(?i)(?:copying|deleting|moving)"] floating enable
 for_window [window_role="(?i)(?:pop-up|setup)"]      floating enable
 
 popup_during_fullscreen smart
+
+
+###############        Bar         ##################
+bar {
+	i3bar_command i3bar
+	status_command i3status
+	position top
+
+## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#	tray_output primary
+#	tray_output eDP1
+
+	bindsym button4 nop
+	bindsym button5 nop
+	strip_workspace_numbers yes
+
+    colors {
+        background #2e3440
+        statusline #eceff4
+        separator  #D8DEE9
+
+        
+
+#                      border  backgr. text
+        focused_workspace  #5E81AC #5E81AC #eceff4
+        active_workspace   #4c566a #2e3440 #D8DEE9
+        inactive_workspace #4c566a #2e3440 #D8DEE9
+        #binding_mode       #4c566a #2e3440 #D8DEE9
+        urgent_workspace   #bf616a #bf616a #eceff4
+    }
+}
+
+# Theme colors for windows
+# class                   border  backgr. text    indic.   child_border
+  client.focused          #5E81AC #5E81AC #eceff4 #268BD2
+  client.focused_inactive #4C566A #4C566A #D8DEE9 #D8DEE9
+  client.unfocused        #4C566A #4C566A #D8DEE9 #D8DEE9
+  client.urgent           #BF616A #BF616A #eceff4 #268BD2
+  client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+  #client.background       #2B2C2B
+
 
