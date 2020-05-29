@@ -25,10 +25,10 @@ Plug 'itchyny/lightline.vim'
 call plug#end()
 
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'dracula',
       \ }
 
-:colorscheme nord 
+:colorscheme dracula
 
 set number
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
