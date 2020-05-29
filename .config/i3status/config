@@ -4,6 +4,9 @@
 general {
         colors = true
         interval = 5
+	color_bad = "#bf616a"
+	color_degraded = "#d08770"
+	color_good = "#a3be8c"
 }
 
 #order += "battery all"
@@ -19,9 +22,9 @@ order += "volume master"
 wireless wlp2s0 {
                    format_up = "W:(%quality at %essid, %bitrate) %ip"
                    format_down = "W: down"
-                   color_bad = "#bf616a"
-                   color_degraded = "#d08770"
-                   color_good = "#a3be8c"
+#                   color_bad = "#bf616a"
+#                   color_degraded = "#d08770"
+#                   color_good = "#a3be8c"
            }
 
 
@@ -46,18 +49,18 @@ disk "/" {
 
 load {
         format = "LOAD:%1min"
-		color_bad = "#bf616a"
-		color_degraded = "#d08770"
-		color_good = "#a3be8c"
+#		color_bad = "#bf616a"
+#		color_degraded = "#d08770"
+#		color_good = "#a3be8c"
 }
 
 memory {
         format = "MEM %used" #%available"
         threshold_degraded = "1G"
         format_degraded = "MEMORY < %available"
-        color_bad = "#bf616a"
-		color_degraded = "#d08770"
-		color_good = "#a3be8c"
+#      color_bad = "#bf616a"
+#		color_degraded = "#d08770"
+#		color_good = "#a3be8c"
 }
 
 cpu_usage {
@@ -66,9 +69,9 @@ cpu_usage {
 		max_threshold = "75"
 		format_above_threshold = "Warning above threshold: %usage"
 		degraded_threshold = "25"
-		color_bad = "#bf616a"
-		color_degraded = "#d08770"
-		color_good = "#a3be8c"
+#		color_bad = "#bf616a"
+#		color_degraded = "#d08770"
+#		color_good = "#a3be8c"
 
 }
 
@@ -76,9 +79,9 @@ cpu_usage {
                    format = "♪:%volume"
                    format_muted = "♪:muted (%volume)"
                    device = "pulse:alsa_output.pci-0000_00_1f.3.analog-stereo"
-                   		color_bad = "#bf616a"
-		color_degraded = "#d08770"
-		color_good = "#a3be8c"
+#                   		color_bad = "#bf616a"
+#		color_degraded = "#d08770"
+#		color_good = "#a3be8c"
            }
 
 
