@@ -12,14 +12,17 @@ runtime! archlinux.vim
 
 
 syntax on
+
 filetype plugin indent on
+
+set background=dark
 
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+"Plug 'itchyny/lightline.vim'
 Plug 'dracula/vim'
 
 call plug#end()
@@ -28,15 +31,11 @@ set noshowmode
 
 set laststatus=2
 
-"if !has('gui_running')
-"	  set t_Co=256
-"  endif
+"let g:lightline = {
+"      \ 'colorscheme': 'atlas',
+"      \ }
 
-let g:lightline = {
-      \ 'colorscheme': 'atlas',
-      \ }
-
-:colorscheme atlas 
+:colorscheme gruvbox
 
 set number
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
