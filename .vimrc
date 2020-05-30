@@ -30,7 +30,7 @@ Plug 'dracula/vim'
 
 call plug#end()
 
-set noshowmode
+""set noshowmode
 
 set laststatus=2
 
@@ -41,10 +41,10 @@ set laststatus=2
 "      \ }
 
 :colorscheme astroboy 
+let g:airline_theme='archery'
 
 set number
 
-let g:airline_theme='archery'
 
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
 " Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
