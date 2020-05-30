@@ -90,7 +90,7 @@ rofi.color-active: argb:00000000, #ebcb8b, argb:00000000, argb:00000000, #a3be8c
 rofi.kb-cancel: Escape,Alt+F1
 
 ! xterm
-xterm*termName: xterm-256color
+xterm*termName: xterm
 xterm*font: monospace
 xterm*faceName: monospace:size=13
 xterm*loginShell: true
