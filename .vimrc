@@ -15,7 +15,10 @@ syntax on
 
 filetype plugin indent on
 
-set background=dark
+:set patchmode=.bak
+
+
+" set background=
 
 call plug#begin()
 
@@ -31,13 +34,18 @@ set noshowmode
 
 set laststatus=2
 
+"let g:airline_powerline_fonts = 1
+
 "let g:lightline = {
 "      \ 'colorscheme': 'atlas',
 "      \ }
 
-:colorscheme gruvbox
+:colorscheme archery 
 
 set number
+
+"let g:airline_theme='angr'
+
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
 " Or better yet, read /usr/share/vim/vim80/vimrc_example.vim or the vim manual
 " and configure vim to your own liking!
