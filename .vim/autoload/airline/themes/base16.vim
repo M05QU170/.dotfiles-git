@@ -86,9 +86,9 @@ else
     let s:N3 = airline#themes#get_highlight('CursorLine')
     let g:airline#themes#base16#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
 
-    let group = airline#themes#get_highlight('Statement')
+    let group = airline#themes#get_highlight('vimCommand')
     let g:airline#themes#base16#palette.normal_modified = {
-          \ 'airline_c': [ group[0], '', group[2], '', '' ]
+          \ 'statusline': [ group[0], '', group[2], '', '' ]
           \ }
 
     let s:I1 = airline#themes#get_highlight2(['DiffText', 'bg'], ['DiffAdded', 'fg'], 'bold')

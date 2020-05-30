@@ -18,6 +18,7 @@ let s:gui0C = "004a9e"
 let s:gui0D = "0db57d"
 let s:gui0E = "7eb6f6"
 let s:gui0F = "afd4fe"
+let s:gui0G = "34659d"
 
 " Terminal color definitions
 let s:cterm00 = "231   "
@@ -36,6 +37,7 @@ let s:cterm0C = "25    "
 let s:cterm0D = "36    "
 let s:cterm0E = "75    "
 let s:cterm0F = "251   "
+let s:cterm0G = "241   "
 
 " Theme setup
 hi clear
@@ -82,7 +84,7 @@ call <sid>hi("Folded",        s:gui03, s:gui01, s:cterm03, s:cterm01, "")
 call <sid>hi("IncSearch",     s:gui00, s:gui0E, s:cterm00, s:cterm0E, "none")
 call <sid>hi("Italic",        "", "", "", "", "none")
 call <sid>hi("Macro",         s:gui08, "", s:cterm08, "", "")
-call <sid>hi("MatchParen",    s:gui00, s:gui03, s:cterm00, s:cterm03,  "")
+call <sid>hi("MatchParen",    s:gui0G, s:gui02, s:cterm0G, s:cterm02,  "")
 call <sid>hi("ModeMsg",       s:gui0B, "", s:cterm0B, "", "")
 call <sid>hi("MoreMsg",       s:gui0B, "", s:cterm0B, "", "")
 call <sid>hi("Question",      s:gui0D, "", s:cterm0D, "", "")
@@ -267,11 +269,11 @@ exe 'hi link coffeeConditional Conditional'
 " Ruby highlighting
 call <sid>hi("rubyAttribute",               s:gui0D, "", s:cterm0D, "", "")
 call <sid>hi("rubyInclude",                 s:gui0D, "", s:cterm0D, "", "")
-call <sid>hi("rubyLocalVariableOrMethod",   s:gui0F, "", s:cterm0F, "", "")
-call <sid>hi("rubyCurlyBlock",              s:gui0F, "", s:cterm0F, "", "")
+call <sid>hi("rubyLocalVariableOrMethod",   s:gui0E, "", s:cterm0E, "", "")
+call <sid>hi("rubyCurlyBlock",              s:gui0E, "", s:cterm0E, "", "")
 call <sid>hi("rubyConstant",                s:gui0A, "", s:cterm0A, "", "")
 call <sid>hi("rubyInterpolation",           s:gui0B, "", s:cterm0B, "", "")
-call <sid>hi("rubyInterpolationDelimiter",  s:gui0F, "", s:cterm0F, "", "")
+call <sid>hi("rubyInterpolationDelimiter",  s:gui0E, "", s:cterm0E, "", "")
 call <sid>hi("rubyRegexp",                  s:gui0C, "", s:cterm0C, "", "")
 call <sid>hi("rubySymbol",                  s:gui0B, "", s:cterm0B, "", "")
 call <sid>hi("rubyStringDelimiter",         s:gui0B, "", s:cterm0B, "", "")
