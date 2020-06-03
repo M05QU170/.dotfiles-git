@@ -11,39 +11,42 @@
 runtime! archlinux.vim
 
 
-syntax on
 
 filetype plugin indent on
 
-:set patchmode=.bak
-
-
+set patchmode=.bak
+set noshowmode
+set showtabline=2
+set laststatus=2
+set termguicolors 
+set number relativenumber
+syntax on
 " set background=dark
+colorscheme nord 
+set encoding=utf-8
+if !has('gui_running')
+  set t_Co=256
+endif
+set wildmenu
+set wildmode=longest,list,full
 
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'preservim/nerdtree'
 "Plug 'itchyny/lightline.vim'
 Plug 'dracula/vim'
 
 call plug#end()
 
-""set noshowmode
-
-set laststatus=2
-
 "let g:airline_powerline_fonts = 1
+"let g:airline_theme='nord'
 
 "let g:lightline = {
-"      \ 'colorscheme': 'atlas',
+"      \ 'colorscheme': 'nord',
 "      \ }
-
-:colorscheme astroboy 
-let g:airline_theme='archery'
-
-set number
 
 
 " If you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
