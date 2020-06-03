@@ -35,7 +35,7 @@ from typing import List  # noqa: F401
 homedir = os.path.expanduser('~')
 configdir = [ homedir + '/.config/qtile' ]
 
-rofimenu = "rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal alacritty"
+rofimenu = "rofi -show drun -modi drun,run,window -show-icons -display-drun 'Apps' -display-run 'Cmds' -display-window 'Windows' -scroll-method 0 -sidebar-mode -lines 20 -columns 1 -terminal termite"
 
 rofiwindowswitcher = "rofi -show window -modi window -cycle -show-icons -display-window 'Windows' -window-format '{w} {c} {t} {n}' -scroll-method 0 -lines 10 -columns 10 -eh 2 -padding 2% -spacing 2%"
 
@@ -103,7 +103,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("alacritty")),
+    Key([mod], "Return", lazy.spawn("termite")),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
