@@ -1,0 +1,17 @@
+{% for tag in workspace.tags %}
+{% if tag.mine %}
+%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F#2e3440}%{B#FFB52A}  {{tag.name}}  %{B-}%{F-}
+%{A}
+{% elsif tag.visible  %}
+%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F#2e3440}%{B#E60053}  {{tag.name}}  %{B-}%{F-}
+%{A}
+{% else tag.visible  %}
+%{A1:$SCRIPTPATH/change_to_tag {{workspace.index}} {{tag.index}}:}
+%{F#eceff4}  {{tag.name}}  %{F-}
+%{A}
+{% endif %}
+{% endfor %}
+%{c}
+{{ window_title }}
