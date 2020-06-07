@@ -29,6 +29,7 @@ airline-cursormode	airline.txt	/*airline-cursormode*
 airline-customization	airline.txt	/*airline-customization*
 airline-default	airline.txt	/*airline-default*
 airline-denite	airline.txt	/*airline-denite*
+airline-dirvish	airline.txt	/*airline-dirvish*
 airline-eclim	airline.txt	/*airline-eclim*
 airline-extensions	airline.txt	/*airline-extensions*
 airline-features	airline.txt	/*airline-features*
