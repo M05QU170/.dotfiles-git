@@ -20,6 +20,14 @@
 !*.color14: #96b5b4
 !*.color15: #c0c5ce
 
+!*dwm color config
+dwm.normbordercolor: #2e3440
+dwm.normbgcolor: #2e3440
+dwm.normfgcolor: #d8dee9
+dwm.selbordercolor: #5e81ac
+dwm.selbgcolor: #5e81ac
+dwm.selfgcolor: #eceff4
+
 !Nord Color Palette
 #define nord0 #2E3440
 #define nord1 #3B4252
