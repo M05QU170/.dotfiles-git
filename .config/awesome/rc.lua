@@ -17,12 +17,11 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+local freedesktop = require("freedesktop")
 
 --{added from ArchLabs
-
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-
 --added from ArchLabs}
 
 -- {{{ Error handling
@@ -53,13 +52,13 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 --beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
-beautiful.init("/home/tomas/.config/awesome/themes/default/theme.lua")
+beautiful.init("~/.config/awesome/themes/default/theme.lua")
 
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xfce4-terminal"--"urxvt" --"xfce4-terminal" --"xterm"
-editor = os.getenv("EDITOR") or "nano"
-editor_cmd = "urxvt" .. " -e " .. editor
+terminal = "termite"
+editor = os.getenv("EDITOR") or "nvim"
+editor_cmd = "termite" .. " -e " .. editor
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -91,21 +90,24 @@ awful.layout.layouts = {
 
 -- {{{ Menu
 -- Create a launcher widget and a main menu
---myawesomemenu = {
---   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
---   { "manual", terminal .. " -e man awesome" },
---   { "edit config", editor_cmd .. " " .. awesome.conffile },
---   { "restart", awesome.restart },
---   { "quit", function() awesome.quit() end },
---}
+myawesomemenu = {
+   { "hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end },
+   { "manual", terminal .. " -e man awesome" },
+   { "edit config", editor_cmd .. " " .. awesome.conffile },
+   { "restart", awesome.restart },
+   { "quit", function() awesome.quit() end },
+}
+
+mymainmenu = freedesktop.menu.build() -- this is an awful.menuR
 
 --mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
---                                    { "open terminal", terminal }
---                                  }
---                        })
+                                    --{ "open terminal", terminal }
+                                  --}
+                        --})
 
---mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
---                                    menu = mymainmenu })
+mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+                                     menu = 
+                                     mymainmenu, myawesomemenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -208,6 +210,7 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
+    
     s.mywibox = awful.wibar({ position = "top", screen = s, bg = beautiful.xbackground, height = dpi(28) })
 
     -- Add widgets to the wibox
@@ -327,19 +330,19 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "r",     function () awful.spawn("rofi -show run") end, --awful.screen.focused().mypromptbox:run() end,
               {description = "run rofi", group = "launcher"}),
               
-	awful.key({ modkey },            "d",     function () awful.spawn("dmenu_run") end,
+	awful.key({ modkey },            "d",     function () awful.spawn("dmenu_recency") end,
               {description = "run dmenu", group = "launcher"}),
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"}),
+    --awful.key({ modkey }, "x",
+              --function ()
+                  --awful.prompt.run {
+                    --prompt       = "Run Lua code: ",
+                    --textbox      = awful.screen.focused().mypromptbox.widget,
+                    --exe_callback = awful.util.eval,
+                    --history_path = awful.util.get_cache_dir() .. "/history_eval"
+                  --}
+              --end,
+              --{description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
@@ -585,11 +588,10 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 
-awful.spawn.with_shell("/home/tomas/.config/awesome/autostart.sh")
-
-
 
 --AUTOSTART
+
+awful.spawn.with_shell("~/.config/awesome/autostart.sh")
 
 --awful.spawn.once("xfsettingsd")
 --awful.spawn.once("nm-applet")

@@ -39,7 +39,7 @@ theme.xcolor15 =  "#c0c5ce"
 
 theme.taglist_bg = theme.xcolor0
 
-theme.taglist_bg_focus = "#924441"--theme.xcolor4
+theme.taglist_bg_focus = theme.xcolor4
 theme.taglist_fg_focus = theme.xforeground
 theme.taglist_bg_urgent = theme.xcolor1
 theme.taglist_fg_urgent = theme.xforeground
@@ -59,7 +59,7 @@ theme.taglist_font        = "Terminus 14"
 theme.font          = "Monospace 11"
 --theme.font			= "UbuntuMono Nerd Font 12"
 theme.bg_normal     = "#222222"
-theme.bg_focus      = "#924441"--"#535d6c"
+theme.bg_focus      = "#535d6c"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
@@ -72,7 +72,7 @@ theme.fg_minimize   = "#ffffff"
 theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(2)
 theme.border_normal = "#000000"
-theme.border_focus  = "#924441"--"#535d6c"
+theme.border_focus  = "#535d6c"
 theme.border_marked = "#91231c"
 
 -- There are other variable sets
