@@ -1433,7 +1433,7 @@ void
 quit(const Arg *arg)
 {
 	running = 0;
-} 
+}
 
 Monitor *
 recttomon(int x, int y, int w, int h)
