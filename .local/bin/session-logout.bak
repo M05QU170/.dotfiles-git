@@ -19,10 +19,6 @@ case "$WM" in
 	openbox)
 		openbox --exit
 		;;
-	dwm)
-		pkill dwm
-		;;
-
 	xfce)
 		xfce4-session-logout --logout
 		;;
