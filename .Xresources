@@ -21,9 +21,9 @@
 !*.color15: #c0c5ce
 
 !*dwm color config
-dwm.normbordercolor: #2e3440
+dwm.normbordercolor: #4c566a
 dwm.normbgcolor: #2e3440
-dwm.normfgcolor: #d8dee9
+dwm.normfgcolor: #eceff4
 dwm.selbordercolor: #5e81ac
 dwm.selbgcolor: #5e81ac
 dwm.selfgcolor: #eceff4
