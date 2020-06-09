@@ -29,7 +29,7 @@ call plug#end()
 set patchmode=.bak
 set noshowmode
 set showtabline=0
-set hls is ic
+set hls "is ic
 set laststatus=2 cmdheight=1
 set termguicolors
 set cursorline
