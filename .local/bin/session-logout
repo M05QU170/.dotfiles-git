@@ -22,8 +22,7 @@ case "$WM" in
 	dwm)
 		pkill dwm
 		;;
-
-	xfce)
+	 xfce)
 		xfce4-session-logout --logout
 		;;
 	bspwm)
