@@ -188,7 +188,7 @@ colors = init_colors()
 
 widget_defaults = dict(
     font='Monospace',
-    fontsize=13,
+    fontsize=14,
     padding=4,
     background=colors[14],
     foreground=colors[15]
@@ -212,18 +212,18 @@ screens = [
                         urgent_text = 'bf616a'
 						),
                 widget.Prompt(
-						 prompt="run: ",
+                    prompt="run: ",
 						 background="#4c566a",
 						 bell_style='visual',
                          ignore_dups_history=True,
                          visual_bell_color	= 'bf616a'
                         ),
                 widget.TaskList(
-						icon_size=18,
+                    icon_size=18,
 						txt_floating=" ",
 						txt_maximized=" ",
 						txt_minimized=" ",
-                        max_title_width = 200,
+                        max_title_width = 250,
 						#highlight_method='block',
 						border='5E81AC',
                         ),
@@ -239,7 +239,7 @@ screens = [
                         ),
                widget.TextBox(
                         text="CPU",
-                        fontsize = 12,
+                        #fontsize = 12,
                         padding = 0,
                         ),
 				# widget.CPUGraph(
@@ -256,7 +256,7 @@ screens = [
                         padding = 5,
                         ),			
 				widget.TextBox(
-                        text="Mem",
+                        text="MEM",
                         ),
 				widget.Memory(
                         format = '{MemUsed}M',
@@ -273,20 +273,20 @@ screens = [
 						# linewidth = 1,
 						# padding = 5,
 						# ),
-				widget.Pacman(
-                       execute = "alacritty",
-                       update_interval = 600,
+			#	widget.Pacman(
+                       #execute = "alacritty",
+                       #update_interval = 600,
                        #foreground = 'A3BE8C',
                        #unavailable = 'D08770',
-                       ),
-                # widget.CheckUpdates(
-						# colour_have_updates = 'D08770',#"A3BE8C",
-						# #custom_command = 'sudo pacman -Syyu',
-						# execute = "termite",
-						# update_interval = 600,
-						# display_format = '{updates}'
+                       #),
+                widget.CheckUpdates(
+						 colour_have_updates = 'D08770',#"A3BE8C",
+						 custom_command = 'checkupdate',
+						 execute = "termite",
+						 update_interval = 600,
+						 # display_format = '{updates}'
 						# #colour_no_updates = 'D08770',
-						# ),
+						),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
