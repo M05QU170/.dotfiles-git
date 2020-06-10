@@ -1,6 +1,8 @@
 #! /bin/bash
 
 cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $1 + $2}' | awk '{ printf("CPU:%.1f%\n"), $0;}')"
+ cputemp="$(sensors | awk '/^CPU:/{print $2}'  | awk '{ printf("%.0f°C\n"), $0;}')"
+ #"$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
  
     # LOAD_FIELDS specifies the load average values to be displayed. Values
     # within 1-3 are allowed, passed as a range (-) or comma-separated.
@@ -16,4 +18,4 @@ cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $1 + $2}' | awk '{ printf("CPU:%.1
 #       printf " ⏱ %s" "$LOAD_AVG "
 #    else
 #      printf  " AVG %s" "$LOAD_AVG "
-echo -e "$cpu | AVG:$LOAD_AVG"
+echo -e "🌡 $cputemp | $cpu " # | AVG:$LOAD_AVG"
