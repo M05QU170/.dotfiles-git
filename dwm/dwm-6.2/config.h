@@ -72,7 +72,7 @@ static const char *dmenurecency[] = { "dmenu_recency", NULL };
 static const char *termcmd[]  = { "termite", NULL };
 static const char *logout[]  = { "rofi-logout", NULL };
 
-
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenurecency } },
@@ -112,6 +112,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,		XK_q,	spawn,          {.v = logout } },
+	
+	{ 0, XF86XK_AudioPrev,		spawn,		SHCMD("playerctl previous") },
+	{ 0, XF86XK_AudioNext,		spawn,		SHCMD("playerctl next") },
+	{ 0, XF86XK_AudioPlay,		spawn,		SHCMD("playerctl play-pause") },
+	
 };
 
 /* button definitions */
