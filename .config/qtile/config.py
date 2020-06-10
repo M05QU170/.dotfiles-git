@@ -55,7 +55,7 @@ keys = [
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
-    Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
+   # Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
 
     # Switch between windows in current stack pane
     Key([mod], "h", lazy.layout.left()),
