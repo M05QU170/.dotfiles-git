@@ -10,8 +10,10 @@ case $question in
         ;;
     *Logout)
         #pkill -9 -u $USER
-        loginctl terminate-user $USER
-        ;;
+        #pkill -15 -u $USER
+	loginctl terminate-user $USER
+	#loginctl kill-user --signal=SIGTERM $USER
+	;;
     *Reboot)
         systemctl reboot
         ;;
@@ -19,8 +21,9 @@ case $question in
         systemctl poweroff
         ;;
     *Suspend)
-        i3lock-fancy && systemctl suspend
-        ;;
+        #i3lock-fancy && systemctl suspend
+        i3lock-fancy && systemctl -i suspend-then-hibernate
+	;;
     *)
         exit 0  # do nothing on wrong response
         ;;
