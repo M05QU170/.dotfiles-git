@@ -28,8 +28,8 @@ call plug#end()
 
 set patchmode=.bak
 set noshowmode
-set showtabline=0
-set hls "is ic
+set showtabline=2
+set hls is ic
 set laststatus=2 cmdheight=1
 set termguicolors
 set cursorline
@@ -37,7 +37,7 @@ set number
 syntax on
 set nocompatible
 " set background=dark
-colorscheme nord 
+colorscheme dracula 
 set encoding=utf-8
 if !has('gui_running')
   set t_co=256
@@ -46,7 +46,7 @@ set wildmenu
 set wildmode=longest,list,full
 
 "let g:airline_powerline_fonts = 1
-let g:airline_theme='nord'
+let g:airline_theme='dracula'
 
 "let g:lightline = {
 "      \ 'colorscheme': 'nord',
