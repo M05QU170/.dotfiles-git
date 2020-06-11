@@ -28,21 +28,21 @@ call plug#end()
 
 set patchmode=.bak
 set noshowmode
-set showtabline=1
+set showtabline=2
 set hls is ic
 set laststatus=2 cmdheight=1
-set termguicolors
+"set termguicolors
 set cursorline
 set number 
 syntax on
 " set nocompatible
 " set background=dark
-colorscheme nord 
-let g:airline_theme='nord'
+colorscheme dracula 
+let g:airline_theme='dracula'
 set encoding=utf-8
-if !has('gui_running')
-  set t_co=256
-endif
+"if !has('gui_running')
+"  set t_co=256
+"endif
 set wildmenu
 set wildmode=longest,list,full
 
