@@ -70,7 +70,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *dmenurecency[] = { "dmenu_recency", NULL };
-static const char *termcmd[]  = { "termite", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *logout[]  = { "rofi-logout", NULL };
 
 #include <X11/XF86keysym.h>
