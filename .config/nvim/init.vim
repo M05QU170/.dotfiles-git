@@ -37,7 +37,6 @@ set number
 syntax on
 set nocompatible
 " set background=dark
-colorscheme dracula 
 set encoding=utf-8
 if !has('gui_running')
   set t_co=256
@@ -45,8 +44,10 @@ endif
 set wildmenu
 set wildmode=longest,list,full
 
+colorscheme nord
+
 "let g:airline_powerline_fonts = 1
-let g:airline_theme='dracula'
+let g:airline_theme='nord'
 
 "let g:lightline = {
 "      \ 'colorscheme': 'nord',
