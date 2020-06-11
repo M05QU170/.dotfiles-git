@@ -6,6 +6,8 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME'
 
 [[ $- != *i* ]] && return
 
+bash -c zsh
+
 colors() {
 	local fgc bgc vals seq0
 
