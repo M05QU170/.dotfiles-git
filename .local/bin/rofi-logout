@@ -24,7 +24,7 @@ case $question in
     *Suspend)
         #i3lock-fancy && systemctl suspend
         #i3lock-fancy && systemctl -i suspend-then-hibernate
-	slock && systemctl -i suspend-then-hibernate
+	systemctl -i suspend-then-hibernate && slock 
 	;;
     *)
         exit 0  # do nothing on wrong response

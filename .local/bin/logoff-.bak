@@ -13,9 +13,6 @@ elif [[ $DESKTOP_SESSION =~ ^.*fluxbox$ ]]; then
   killall fluxbox
 elif [[ $DESKTOP_SESSION =~ ^.*bspwm$ ]]; then
   bspc quit 1
-elif [[ $DESKTOP_SESSION =~ ^.*dwm$ ]]; then
-  pkill -15 dwm
-
-#else
-#  /usr/bin/loginctl terminate-user $USERNAME
+else
+  /usr/bin/loginctl terminate-user $USERNAME
 fi
