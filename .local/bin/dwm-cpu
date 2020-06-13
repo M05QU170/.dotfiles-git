@@ -18,4 +18,4 @@ cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $1 + $2}' | awk '{ printf("CPU:%.1
 #       printf " ⏱ %s" "$LOAD_AVG "
 #    else
 #      printf  " AVG %s" "$LOAD_AVG "
-echo -e "🌡 $cputemp | $cpu " # | AVG:$LOAD_AVG"
+echo -e " 🌡 $cputemp | $cpu " # | AVG:$LOAD_AVG"

@@ -10,11 +10,11 @@ fi
 . $HOME/.config/dmenu_recency/dmenurc
 
 if [ -z "$TERMINAL_CMD" ]; then
-  if [ "$(which terminal)" ]; then
-  TERMINAL_CMD="terminal -e"
-  elif [ "$(which urxvt)" ]; then
-  TERMINAL_CMD="termite -e"
+  if [ "$(which alacritty)" ]; then
+  TERMINAL_CMD="alacritty -e"
   elif [ "$(which termite)" ]; then
+  TERMINAL_CMD="termite -e"
+  elif [ "$(which urxvt)" ]; then
   TERMINAL_CMD="urxvt -e"
   elif [ "$(which terminator)" ]; then
   TERMINAL_CMD="terminator -e"
@@ -28,18 +28,20 @@ if [ -z "$TERMINAL_CMD" ]; then
   TERMINAL_CMD="xfce4-terminal -e"
   elif [ "$(which xterm)" ]; then
   TERMINAL_CMD="xterm -e"
-  fi
+   elif [ "$(which kitty)" ]; then
+  TERMINAL_CMD="kitty -e"
+ fi
 fi
 
 dmenu_cmd="dmenu $DMENU_OPTIONS"
 max_recent=199 # Number of recent commands to track
 
-cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/dmenu-recent"
+cache_dir="${XDG_CACHE_HOME:-$HOME/.cache}/dmenu_recency"
 recent_cache="$cache_dir/recent"
 rest_cache="$cache_dir/all"
 known_types=" background terminal terminal_hold "
 
-config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/dmenu-recent"
+config_dir="${XDG_CONFIG_HOME:-$HOME/.config}/dmenu_recency"
 mkdir -p "$cache_dir"
 mkdir -p "$config_dir"
 touch "$recent_cache"
