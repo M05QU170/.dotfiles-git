@@ -1,7 +1,7 @@
 #! /bin/bash 
 
 #fix_xcursor &
-picom -b &
+#picom -b &
 nm-applet &
 #blueman-tray &
 fcitx &
@@ -9,7 +9,7 @@ xfce4-power-manager &
 redshift-gtk &
 variety &
 setxkbmap -layout gb &
-pamac-tray &
+#pamac-tray &
 volumeicon &
 xfsettingsd &
 xfce4-volumed-pulse &
