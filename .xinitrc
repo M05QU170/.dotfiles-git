@@ -19,6 +19,3 @@ export XMODIFIERS=@im=fcitx
 [ -r ~/.Xresources ] && xrdb -merge ~/.Xresources
 [ -r ~/.xprofile ] && . ~/.xprofile
 
-xset s 300
-xsidle.sh slock &
-
