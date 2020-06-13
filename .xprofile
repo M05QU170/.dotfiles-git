@@ -8,6 +8,9 @@ export GTK2_RC_FILES=$HOME/.gtkrc-2.0
 xset dpms 600 900 1200
 xset r rate 350 60
 
+xset s 300
+xsidle.sh slock &
+
 #picom -b &
 #nm-applet &
 #xfce4-power-manager &
