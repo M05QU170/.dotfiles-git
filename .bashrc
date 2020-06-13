@@ -2,11 +2,10 @@
 # ~/.bashrc
 #
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME'
 
 [[ $- != *i* ]] && return
 
-bash -c zsh
+#bash -c zsh
 
 colors() {
 	local fgc bgc vals seq0
@@ -44,7 +43,7 @@ case ${TERM} in
 		;;
 	screen*)
 		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-		;;
+ 		;;
 esac
 
 use_color=true
@@ -79,6 +78,7 @@ if ${use_color} ; then
 		PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
 	fi
 
+	alias ll='ls -l --color=auto'
 	alias ls='ls --color=auto'
 	alias grep='grep --colour=auto'
 	alias egrep='egrep --colour=auto'
@@ -94,12 +94,15 @@ fi
 
 unset use_color safe_term match_lhs sh
 
+
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 alias vi='vim'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME'
+
 
 xhost +local:root > /dev/null 2>&1
 
