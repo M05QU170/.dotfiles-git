@@ -19,8 +19,12 @@ super + Escape
 #
 
 # quit/restart bspwm
-super + alt + {q,r}
-	bspc {quit,wm -r}
+super + alt + r
+        #bspc {quit,wm -r}
+	bspc wm -r
+
+super + alt + q
+	rofi-logout
 
 # close and kill
 super + {_,shift + }w
