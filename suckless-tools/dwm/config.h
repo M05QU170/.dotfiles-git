@@ -38,7 +38,7 @@ static const Rule rules[] = {
 //	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 	{ NULL,  NULL,       "galculator",       0,       1,           -1 },
 	{ NULL,  NULL,       "gsimplecal",       0,       1,           -1 },
-
+        { "java-lang-Thread",  NULL,       NULL,	0,	1,	-1 },
 };
 
 /* layout(s) */
