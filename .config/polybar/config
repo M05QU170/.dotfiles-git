@@ -18,32 +18,35 @@
 
 [colors]
 background = #2e3440
-;background = #222
-;background-alt = #444
+background-alt = #3b4252
 foreground = #eceff4
-#foreground = #dfdfdf
-foreground-alt = #d8dee9
+foreground-alt = #4c566a
+focused = #5e81ac
+;yellow
 primary = #ebcb8b
+;orange
 secondary = #d08770
+;red
 alert = #bf616a
+
 
 [bar/bspwm]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 27
+height = 25
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0.0
 fixed-center = false
 
-background = #4c566a
-foreground = #eceff4
+background = ${colors.background}
+foreground = ${colors.foreground}
 
 line-size = 3
-line-color = #b48ead
+line-color = ${colors.secondary} 
 
 border-size = 2
-border-color = #2e3440
+border-color = ${colors.background}
 
 padding-left = 0
 padding-right = 2
@@ -56,14 +59,14 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 
 modules-left = bspwm
-modules-center = 
-modules-right = memory cpu temperature date powermenu
-;; filesystem xbacklight alsa pulseaudio xkeyboard wlan eth battery  
+modules-center = xwindow 
+modules-right = cpu memory date 
+;; filesystem powermenu  xbacklight alsa pulseaudio xkeyboard wlan eth battery  
 
 
 tray-position = right
 tray-padding = 2
-;tray-background = #0063ff
+tray-background = ${colors.background-alt}
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -113,8 +116,8 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 label-focused = %index%
-label-focused-background = #5e81ac
-label-focused-underline= #81a1c1
+label-focused-background = ${colors.focused}
+;label-focused-underline= #5e81ac
 label-focused-padding = 2
 
 label-occupied = %index%
@@ -125,7 +128,7 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %index%
-label-empty-foreground = #7B88A1
+label-empty-foreground = ${colors.foreground-alt} 
 label-empty-padding = 2
 
 ; Separator in between workspaces
@@ -141,7 +144,7 @@ wrapping-scroll = false
 ;pin-workspaces = true
 
 label-mode-padding = 2
-label-mode-foreground = #000
+label-mode-foreground = ${colors.foreground}
 label-mode-background = ${colors.primary}
 
 ; focused = Active workspace on focused monitor
@@ -207,17 +210,18 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f90000
+;format-prefix = " "
+format-prefix = "CPU: "
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.secondary}
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+format-prefix = "MEM: "
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.secondary}
 label = %percentage_used%%
 
 [module/wlan]
@@ -262,15 +266,15 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
-date-alt = " %a %d %b"
+date = "%a %d %b, "
+;date-alt = "%a %d %b, "
 
 time = %H:%M
-time-alt = %H:%M
+;time-alt = %H:%M
 
-format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+format-prefix = 
+format-prefix-foreground = ${colors.foreground}
+format-underline = ${colors.secondary}
 
 label = %date% %time%
 
@@ -368,7 +372,7 @@ thermal-zone = 0
 warn-temperature = 60
 
 format = <ramp> <label>
-format-underline = #f50a4d
+format-underline = ${colors.secondary} 
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -419,7 +423,7 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
-margin-top = 5
-margin-bottom = 5
+margin-top = 0
+margin-bottom = 0
 
 ; vim:ft=dosini
