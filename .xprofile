@@ -11,6 +11,9 @@ xset r rate 350 60
 xset s 300
 xsidle.sh slock &
 
+xset +fp /home/tomas/.local/share/fonts
+xset fp rehash
+
 #picom -b &
 #nm-applet &
 #xfce4-power-manager &
