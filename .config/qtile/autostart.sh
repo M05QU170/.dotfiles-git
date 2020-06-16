@@ -1,9 +1,9 @@
 #!/bin/sh
 
-fix_xcursor &
+#fix_xcursor &
 picom -b &
 nm-applet &
-blueman-tray &
+#blueman-tray &
 fcitx &
 xfce4-power-manager &
 redshift-gtk &
