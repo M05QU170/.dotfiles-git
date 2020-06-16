@@ -20,7 +20,7 @@ Plug 'arcticicestudio/nord-vim'
 "Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
 Plug 'itchyny/lightline.vim'
-Plug 'dracula/vim'
+Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
 
