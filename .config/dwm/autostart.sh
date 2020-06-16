@@ -1,7 +1,7 @@
 #! /bin/bash 
 
 #fix_xcursor &
-#picom -b &
+picom -b &
 nm-applet &
 #blueman-tray &
 fcitx &
