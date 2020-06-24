@@ -16,10 +16,10 @@ filetype plugin indent on
 call plug#begin()
 
 Plug 'arcticicestudio/nord-vim'
-"Plug 'vim-airline/vim-airline'
-"Plug 'vim-airline/vim-airline-themes'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'preservim/nerdtree'
-Plug 'itchyny/lightline.vim'
+"Plug 'itchyny/lightline.vim'
 Plug 'dracula/vim', { 'as': 'dracula' }
 
 call plug#end()
@@ -31,7 +31,7 @@ set noshowmode
 "set showtabline=2
 set hls is ic
 set laststatus=2 cmdheight=1
-"set termguicolors
+"set termguicolors "it doesn't work with alacritty
 set cursorline
 set number 
 syntax on
@@ -45,14 +45,14 @@ set wildmenu
 set wildmode=longest,list,full
 
 
-colorscheme tokyonight 
+colorscheme nord
 
-"let g:airline_theme='nord'
+let g:airline_theme='nord'
 "let g:airline_powerline_fonts = 1
 
-let g:lightline = {
-      \ 'colorscheme': 'tokyonight',
-     \ }
+"let g:lightline = {
+"      \ 'colorscheme': 'nord',
+"     \ }
 
 
 " if you prefer the old-style vim functionalty, add 'runtime! vimrc_example.vim'
