@@ -17,4 +17,3 @@ xfce4-volumed-pulse &
 gnome-keyring-daemon --start --components=pkcs11 &
 dwmblocks &
 #~/.dwm/dwm-statusbar &
-
