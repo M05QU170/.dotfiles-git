@@ -125,7 +125,7 @@ URxvt.pasteCommand: xclip -o -selection clipboard
 URxvt.clipboard.autocopy: true
 URxvt.keysym.m-c: perl:clipboard:copy
 URxvt.keysym.m-v: perl:clipboard:paste
-URxvt.urlLauncher: exo-open
+URxvt.urlLauncher: exo-open firefox
 URxvt.underlineURLs: true
 URxvt.urlButton: 1
 URxvt.geometry: 90x34
