@@ -218,14 +218,17 @@ screens = [
                          ignore_dups_history=True,
                          visual_bell_color	= 'bf616a'
                         ),
+				#widget.WindowName(),
+						
                 widget.TaskList(
                     icon_size=18,
 						txt_floating=" ",
 						txt_maximized=" ",
 						txt_minimized=" ",
-                        max_title_width = 250,
+                        max_title_width = 300,
 						#highlight_method='block',
 						border='5E81AC',
+						urgent_border='bf616a',
                         ),
 				#widget.Sep(),
 				# widget.Net(
@@ -237,30 +240,30 @@ screens = [
                         linewidth = 0,
                         padding = 5,
                         ),
-               widget.TextBox(
-                        text="CPU",
-                        #fontsize = 12,
-                        padding = 0,
-                        ),
+               # widget.TextBox(
+                        # text="CPU",
+                        # #fontsize = 12,
+                        # padding = 0,
+                        # ),
 				# widget.CPUGraph(
                          # width = 50,
                          # line_width = 2,
                          # type = 'line',
                         # ),
                 widget.CPU(
-						foreground = '88c0d0',
-						format = '{load_percent}%',
+						#foreground = '88c0d0',
+						format = 'CPU:{load_percent}%',
 						),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
                         ),			
-				widget.TextBox(
-                        text="MEM",
-                        ),
+				# widget.TextBox(
+                        # text="MEM",
+                        # ),
 				widget.Memory(
-                        format = '{MemUsed}M',
-                        foreground = '88c0d0',
+                        format = 'MEM:{MemUsed}M',
+                        #foreground = '88c0d0',
                         padding = 5,
                         ),
 				widget.Sep(
@@ -284,7 +287,7 @@ screens = [
 						 custom_command = 'checkupdate',
 						 execute = "termite",
 						 update_interval = 600,
-						 # display_format = '{updates}'
+						 display_format = '📦 {updates}'
 						# #colour_no_updates = 'D08770',
 						),
 				widget.Sep(
@@ -316,7 +319,7 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.6),
 
             ],
-            size=32,
+            size=28,
         ),
     ),
 ]
