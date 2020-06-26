@@ -31,16 +31,16 @@ set noshowmode
 "set showtabline=2
 set hls is ic
 set laststatus=2 cmdheight=1
-"set termguicolors "it doesn't work with alacritty
+set termguicolors "it doesn't work with alacritty
 set cursorline
 set number 
 syntax on
  set nocompatible
 " set background=dark
 set encoding=utf-8
-if !has('gui_running')
-  set t_co=256
-endif
+"if !has('gui_running')
+"  set t_co=256
+"endif
 set wildmenu
 set wildmode=longest,list,full
 
