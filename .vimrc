@@ -26,6 +26,7 @@ call plug#end()
 
 
 
+
 set patchmode=.bak
 set noshowmode
 "set showtabline=2
