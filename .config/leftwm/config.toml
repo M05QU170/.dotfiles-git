@@ -10,7 +10,7 @@ key = "p"
 
 [[keybind]]
 command = "Execute"
-value = "termite"
+value = "xfce4-terminal"
 modifier = ["modkey", "Shift"]
 key = "Return"
 
