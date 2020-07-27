@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=yaxwm
+Comment=yaxwm Session
+Exec=yaxwm
+Type=Application
+Keywords=wm;tiling
