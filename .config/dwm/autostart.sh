@@ -14,6 +14,6 @@ volumeicon &
 xfsettingsd &
 xfce4-volumed-pulse &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-gnome-keyring-daemon --start --components=pkcs11 &
+#gnome-keyring-daemon --start --components=pkcs11 &
 dwmblocks &
 #~/.dwm/dwm-statusbar &
