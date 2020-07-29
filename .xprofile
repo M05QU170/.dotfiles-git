@@ -12,8 +12,8 @@ export XMODIFIERS=@im=fcitx
 xset dpms 600 900 1200
 xset r rate 350 60
 
-xset s 300
-xsidle.sh slock &
+#xset s 300
+#xsidle.sh slock &
 
 #picom -b &
 #nm-applet &
