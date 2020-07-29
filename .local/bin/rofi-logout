@@ -7,7 +7,8 @@ question=$(echo "Lock|Logout|Reboot|Shutdown|Suspend" | rofi -sep "|" \
 case $question in
     *Lock)
         #i3lock-fancy
-        slock
+        #slock
+	xflock4
 	;;
     *Logout)
         #pkill -9 -u $USER
@@ -16,14 +17,15 @@ case $question in
 	#loginctl kill-user --signal=SIGTERM $USER
 	;;
     *Reboot)
-        systemctl reboot
+        systemctl -i reboot
         ;;
     *Shutdown)
-        systemctl poweroff
+        systemctl -i poweroff
         ;;
     *Suspend)
         #i3lock-fancy && systemctl suspend
-	systemctl -i suspend && slock 
+	#systemctl -i suspend && slock 
+	systemctl -i suspend
 	;;
     *)
         exit 0  # do nothing on wrong response
