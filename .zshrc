@@ -16,11 +16,15 @@ fi
 SHELL=/bin/zsh
 KEYTIMEOUT=1
 SAVEHIST=10000
-HISTSIZE=10000
+HISTSIZE=1000
 HISTFILE="$HOME/.cache/.zsh_history"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME'
+alias dotfiles-push='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME push origin master'
 
+export EDITOR=/usr/bin/vim
+
+alias vi='vim'
 alias la='ls -a'
 alias ll='ls -la'
 alias grep='grep --color=auto'
