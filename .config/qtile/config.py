@@ -39,7 +39,7 @@ rofimenu = "rofi -show drun -modi drun,run,window -show-icons -display-drun 'App
 
 rofiwindowswitcher = "rofi -show window -modi window -cycle -show-icons -display-window 'Windows' -window-format '{w} {c} {t} {n}' -scroll-method 0 -lines 10 -columns 10 -eh 2 -padding 2% -spacing 2%"
 
-
+terminal = "xfce4-terminal"
 
 
 mod = "mod4"
@@ -49,8 +49,8 @@ alt = "mod1"
 keys = [
 
 	# general volume
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
+#    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 -q set Master 2dB+")),
+#    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 -q set Master 2dB-")),
 
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
@@ -103,7 +103,7 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("termite")),
+    Key([mod], "Return", lazy.spawn(terminal)),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
@@ -252,7 +252,7 @@ screens = [
                         # ),
                 widget.CPU(
 						#foreground = '88c0d0',
-						format = 'CPU:{load_percent}%',
+						format = ' {load_percent}%',
 						),
 				widget.Sep(
                         linewidth = 1,
@@ -262,7 +262,7 @@ screens = [
                         # text="MEM",
                         # ),
 				widget.Memory(
-                        format = 'MEM:{MemUsed}M',
+                        format = ' {MemUsed}M',
                         #foreground = '88c0d0',
                         padding = 5,
                         ),
@@ -276,20 +276,23 @@ screens = [
 						# linewidth = 1,
 						# padding = 5,
 						# ),
-			#	widget.Pacman(
-                       #execute = "alacritty",
-                       #update_interval = 600,
+				widget.TextBox(
+                         text="📦",
+                         ),
+				widget.Pacman(
+                       execute = 'xfce4-terminal',
+                       update_interval = 600,
                        #foreground = 'A3BE8C',
                        #unavailable = 'D08770',
-                       #),
-                widget.CheckUpdates(
-						 colour_have_updates = 'D08770',#"A3BE8C",
-						 custom_command = 'checkupdate',
-						 execute = "termite",
-						 update_interval = 600,
-						 display_format = '📦 {updates}'
-						# #colour_no_updates = 'D08770',
-						),
+                       ),
+                # widget.CheckUpdates(
+						 # #colour_have_updates = 'D08770',#"A3BE8C",
+						 # custom_command = 'checkupdates',
+                                                 # execute = "xfce4-terminal",
+						 # update_interval = 600,
+						 # display_format = '📦 {updates}'
+                                                 # # #colour_no_updates = 'D08770',
+						# ),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
