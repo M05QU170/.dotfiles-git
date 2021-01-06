@@ -5,11 +5,11 @@ static const Block blocks[] = {
 
 	// {" 🔺 ", "dwm-upt",		        60,		            2}, 
 
-	{"", "dwm-pacupdate",		360,		        9},
+	{"", "dwm-pacupdate",		360,		        0},
 	
-	{"", "dwm-cpu",	        5,		            10},
+	{"", "dwm-cpu",	        5,		            18},
 //	{" 💻 ", "dwm-memory",	        6,		            1},
-	{"", "dwm-memory",	        5,		            1},
+	{"", "dwm-memory",	        5,		            14},
 	//  {" 🔊 ", "dwm-volume",			2,		            10}, 
 
 	{"", "dwm-clock",			60,		            0},
