@@ -4,5 +4,5 @@
 #mem="$(free -h | awk '/^Mem:/ {print $3 }' )"
 mem="$(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 
-echo -e " MEM:$mem "
+echo -e "  $mem "
 
