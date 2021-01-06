@@ -1,6 +1,6 @@
 #! /bin/bash
 
-cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $1 + $2}' | awk '{ printf("CPU:%.1f%\n"), $0;}')"
+cpu="$(top -bn1 | grep "Cpu(s)" | awk '{print $1 + $2}' | awk '{ printf(" %.1f%\n"), $0;}')"
  cputemp="$(sensors | awk '/^CPU:/{print $2}'  | awk '{ printf("%.0f°C\n"), $0;}')"
  #"$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
  
