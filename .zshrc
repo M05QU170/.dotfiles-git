@@ -21,7 +21,7 @@ HISTFILE="$HOME/.cache/.zsh_history"
 
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME'
 alias dotfiles-push='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME push origin master'
-alias dotfiles-status='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME status -u no'
+alias dotfiles-status='/usr/bin/git --git-dir=$HOME/.dotfiles-git/ --work-tree=$HOME status -uno'
 
 
 export EDITOR=/usr/bin/vim

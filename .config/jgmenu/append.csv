@@ -1,9 +1,9 @@
 ^sep()
-Lock,i3lock-fancy -p,system-lock-screen
+Lock,xflock4,system-lock-screen
 Exit,^checkout(exit),system-shutdown
 
 exit,^tag(exit)
-logout,session-logout,system-log-out
+logout,loginctl terminate-user $USER,system-log-out
 suspend,systemctl -i suspend,system-log-out
 reboot,systemctl -i reboot,system-reboot
 poweroff,systemctl -i poweroff,system-shutdown
