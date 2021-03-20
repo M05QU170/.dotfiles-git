@@ -111,8 +111,8 @@ keys = [
     #Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control"], "q", lazy.spawn("rofi-logout")),
     
-	#Colors and font config sits at ~/.dmenurc
-	Key([mod], 'd', lazy.spawn("dmenu_recency")), #("dmenu_run -fn 'Noto-11' -sb '#5E81AC' -sf '#eceff4' -nb '#2e3440' -nf '#D8DEE9'")),
+	# dmenu_recency config sits at ~/.config/dmenu_recency/.dmenurc
+	Key([mod], 'p', lazy.spawn("dmenu_recency")),
 	#Key([mod], 'r', lazy.spawn("rofi -show drun -show-icons")),
 
 	Key([mod], 'r', lazy.spawn(rofimenu)),
@@ -160,7 +160,6 @@ layouts = [
 
 
 # COLORS FOR THE BAR
-
 
 colors = [["#2e3440", "#2e3440"], # 0 Nord Polar Night Darkest
           ["#3b4252", "#3b4252"], # 1 Nord Polar Night Dark Light 
@@ -353,4 +352,4 @@ def start_once():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+wmname = "qtile"
