@@ -33,7 +33,7 @@ case "$WM" in
 		bspc quit
 		;;
 	qtile)
-			pkill qtile
+		pkill -15 qtile
 		;;
 	*)
 		if pidof xinit >/dev/null 2>&1; then
