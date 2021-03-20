@@ -1,46 +1,65 @@
-#!/usr/bin/env bash
+#!/bin/bash
+
+session=$(echo $DESKTOP_SESSION | cut -d'/' -f5)
+  case $session in
+    "i3")
+        sleep 1;
+        i3exit logout
+        ;;
+    "bspwm")
+        sleep 1;
+        bspc quit
+        ;;
+    "qtile")
+        sleep 1;
+        qtile cmd-obj -o cmd -f shutdown
+  esac
+
+## old version keep as an example
+####!/usr/bin/env bash
 
 
-if [[ -z $DISPLAY ]]; then
-	exit
-elif hash xprop >/dev/null 2>&1; then
-	ID="$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)"
-	WM="$(xprop -id "${ID##* }" -notype -len 100 -f _NET_WM_NAME 8t)"
-	WM="${WM/*WM_NAME = }"
-	WM="${WM/\"}"
-	WM="${WM/\"*}"
-	WM="${WM,,}"
-fi
+#if [[ -z $DISPLAY ]]; then
+	#exit
+#elif hash xprop >/dev/null 2>&1; then
+	#ID="$(xprop -root -notype _NET_SUPPORTING_WM_CHECK)"
+	#WM="$(xprop -id "${ID##* }" -notype -len 100 -f _NET_WM_NAME 8t)"
+	#WM="${WM/*WM_NAME = }"
+	#WM="${WM/\"}"
+	#WM="${WM/\"*}"
+	#WM="${WM,,}"
+#fi
 
-case "$WM" in
-	i3)
-		i3-msg "exit"
-		;;
-	openbox)
-		openbox --exit
-		;;
-	dwm)
-		pkill dwm
-		;;
-	 xfce)
-		xfce4-session-logout --logout
-		;;
-	bspwm)
-		for i in $(bspc query -W); do
-			bspc window "$i" -c
-		done
-		pkill sxhkd
-		bspc quit
-		;;
-	qtile)
-		pkill -15 qtile
-		;;
-	*)
-		if pidof xinit >/dev/null 2>&1; then
-			pkill xinit
-		else
-			pkill -15 -t tty"${XDG_VTNR:-1}" Xorg
-		fi
-		;;
-esac
+#case "$WM" in
+	#i3)
+		#i3-msg "exit"
+		#;;
+	#openbox)
+		#openbox --exit
+		#;;
+	#dwm)
+		#pkill dwm
+		#;;
+	 #xfce)
+		#xfce4-session-logout --logout
+		#;;
+	#bspwm)
+		#for i in $(bspc query -W); do
+			#bspc window "$i" -c
+		#done
+		#pkill sxhkd
+		#bspc quit
+		#;;
+	#qtile)
+		#pkill -15 qtile
+		#;;
+	#*)
+		#if pidof xinit >/dev/null 2>&1; then
+			#pkill xinit
+		#else
+			#pkill -15 -t tty"${XDG_VTNR:-1}" Xorg
+		#fi
+		#;;
+#esac
+
 
