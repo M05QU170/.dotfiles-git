@@ -32,6 +32,9 @@ case "$WM" in
 		pkill sxhkd
 		bspc quit
 		;;
+	qtile)
+			pkill qtile
+		;;
 	*)
 		if pidof xinit >/dev/null 2>&1; then
 			pkill xinit
