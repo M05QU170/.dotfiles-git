@@ -10,8 +10,8 @@ fi
 . $HOME/.config/dmenu_recency/dmenurc
 
 if [ -z "$TERMINAL_CMD" ]; then
-  if [ "$(which alacritty)" ]; then
-  TERMINAL_CMD="alacritty -e"
+  if [ "$(which xfce4-terminal)" ]; then
+  TERMINAL_CMD="xfce4-terminal -x"
   elif [ "$(which termite)" ]; then
   TERMINAL_CMD="termite -e"
   elif [ "$(which urxvt)" ]; then
@@ -24,8 +24,8 @@ if [ -z "$TERMINAL_CMD" ]; then
   TERMINAL_CMD="lxterminal -e"
   elif [ "$(which sakura)" ]; then
   TERMINAL_CMD="sakura -e"
-  elif [ "$(which xfce4-terminal)" ]; then
-  TERMINAL_CMD="xfce4-terminal -e"
+  elif [ "$(which alacritty)" ]; then
+  TERMINAL_CMD="alacritty -e"
   elif [ "$(which xterm)" ]; then
   TERMINAL_CMD="xterm -e"
    elif [ "$(which kitty)" ]; then
