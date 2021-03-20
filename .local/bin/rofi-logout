@@ -14,8 +14,8 @@ case $question in
         #pkill -9 -u $USER
         #pkill -15 -u $USER
 		#loginctl terminate-user $USER
-		#loginctl kill-user --signal=SIGTERM $USER
-		session-logout
+		loginctl kill-user --signal=SIGTERM $USER
+		#session-logout
 		;;
     *Reboot)
         systemctl -i reboot
