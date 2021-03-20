@@ -24,26 +24,6 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# import os, subprocess
-# import re
-# import socket
-# from libqtile import qtile
-# from libqtile.config import Key, Screen, Group, Drag, Click, Match
-# from libqtile.command import lazy
-# from libqtile import layout, bar, widget, hook, extension
-# from typing import List  # noqa: F401
-
-# from subprocess import CalledProcessError
-
-# from libqtile.log_utils import logger
-# from libqtile.utils import (
-    # UnixCommandNotFound,
-    # UnixCommandRuntimeError,
-    # catch_exception_and_warn,
-    # guess_terminal,
-# )
-# from libqtile.widget import base
-
 import os
 import re
 import socket
@@ -64,7 +44,6 @@ rofimenu = "rofi -show drun -modi drun,run,window -show-icons -display-drun 'App
 rofiwindowswitcher = "rofi -show window -modi window -cycle -show-icons -display-window 'Windows' -window-format '{w} {c} {t} {n}' -scroll-method 0 -lines 10 -columns 10 -eh 2 -padding 2% -spacing 2%"
 
 terminal = "xfce4-terminal"
-
 
 mod = "mod4"
 
@@ -141,7 +120,7 @@ keys = [
     Key([mod], 'm', lazy.spawn("morc_menu")),
     Key([mod], "t", lazy.spawncmd()),
 
-    Key([], 'Print', lazy.spawn("scrot '%S.png' -e 'mv $f $$(xdg-user-dir PICTURES)/Screenshots/Arch-%S-$wx$h.png ; feh $$(xdg-user-dir PICTURES)/Screenshots/Arch-%S-$wx$h.png'")),
+    Key([], 'Print', lazy.spawn("scrot '%S.png' -e 'mv $f $$(xdg-user-dir PICTURES)/Arch-%S-$wx$h.png ; feh $$(xdg-user-dir PICTURES)/Arch-%S-$wx$h.png'")),
 	
 ]
 
@@ -161,9 +140,8 @@ layout_theme = {
     "margin": 4,
     "markup": "true",
     "border_focus": "#5e81ac",
-    "border_normal": "#4C566A",
-    "border_focus_stack": '#D08770',
-    "auto_float_types": {'toolbar', 'utility', 'splash', 'dialog', 'notification'}
+    "border_normal": "#616E88",
+    "border_focus_stack": '#ebcb8b',
     }
 
 layouts = [
@@ -183,125 +161,100 @@ layouts = [
 
 # COLORS FOR THE BAR
 
-def init_colors():
-    return [["#2F343F", "#2F343F"], # color 0
-            ["#2F343F", "#2F343F"], # color 1
-            ["#c0c5ce", "#c0c5ce"], # color 2
-            ["#fba922", "#fba922"], # color 3
-            ["#3384d0", "#3384d0"], # color 4
-            ["#f3f4f5", "#f3f4f5"], # color 5
-            ["#cd1f3f", "#cd1f3f"], # color 6
-            ["#62FF00", "#62FF00"], # color 7
-            ["#6790eb", "#6790eb"], # color 8
-            ["#a9a9a9", "#A9A9A9"], # color 9
-            ["#222324", "#222324"], # color 10
-            ["#924441", "#924441"], # color 11
-            ["#00bcd4", "#00bcd4"], # colors[12] (adapta nokto)
-            ["#A52A2A", "#A52A2A"], # colors[13] {cherry colour)
-            ["#2e3440", "#2e3440"], #colors[14] dark bar color ("polar night" nord scheme)
-            ["#eceff4", "#eceff4"], #colors[15] snow storm nord scheme for text 
-            ]
 
+colors = [["#2e3440", "#2e3440"], # 0 Nord Polar Night Darkest
+          ["#3b4252", "#3b4252"], # 1 Nord Polar Night Dark Light 
+          ["#434c5e", "#434c5e"], # 2 Nord Polar Night Dark Lighter
+          ["#4c566a", "#4c566a"], # 3 Nord Polar Night Dark Lightest
+          ["#616E88", "#616E88"], # 4 Nord Polar Night Dark Lightest 2
+          ["#d8dee9", "#d8dee9"], # 5 Nord Snow Storm White Dark
+          ["#e5e9f0", "#e5e9f0"], # 6 Nord Snow Storm White Lighter
+          ["#eceff4", "#eceff4"], # 7 Nord Snow Storm White Lightest
+          ["#8fbcbb", "#8fbcbb"], # 8 Nord Frost Greenish
+          ["#88c0d0", "#88c0d0"], # 9 Nord Frost GreenBlue
+          ["#81a1c1", "#81a1c1"], # 10 Nord Frost Blueish
+          ["#5e81ac", "#5e81ac"], # 11 Nord Frost Blue
+          ["#bf616a", "#bf616a"], # 12 Nord Aurora Red
+          ["#d08770", "#d08770"], # 13 Nord Aurora Orange
+          ["#ebcb8b", "#ebcb8b"], # 14 Nord Aurora Yellow
+          ["#a3be8c", "#a3be8c"], # 15 Nord Aurora Green
+          ["#b48ead", "#b48ead"]] # 16 Nord Aurora Pink
 
-colors = init_colors()
 
 
 widget_defaults = dict(
     font='Monospace',
     fontsize=14,
     padding=4,
-    background=colors[14],
-    foreground=colors[15]
+    background=colors[0],
+    foreground=colors[7]
 )
 extension_defaults = widget_defaults.copy()
 
 screens = [
     Screen(
-#        bottom=bar.Bar(
         top=bar.Bar(
 
 
             [
                 widget.GroupBox(
-						this_current_screen_border='5e81ac',
+						this_current_screen_border=colors[11],
 						padding_y = 5,
                         padding_x = 5,
-                        inactive = "#7b88a1",
-                        #highlight_method = "block",
-                        urgent_border = 'bf616a',
-                        urgent_text = 'bf616a'
+                        inactive = colors[4],
+                        urgent_border = colors[12],
+                        urgent_text = colors[12]
 						),
                 widget.Prompt(
                     prompt="run: ",
-						 background="#4c566a",
+						 background=colors[4],
 						 bell_style='visual',
                          ignore_dups_history=True,
-                         visual_bell_color	= 'bf616a'
+                         visual_bell_color	= colors[12]
                         ),
-				#widget.WindowName(),
                 widget.TaskList(
 						icon_size=18,
 						txt_floating=" ",
 						txt_maximized=" ",
 						txt_minimized=" ",
                         max_title_width = 300,
-						#highlight_method='block',
-						border='5E81AC',
-						urgent_border='bf616a',
+						border=colors[11],
+						urgent_border=colors[12],
                         ),
-				#widget.Sep(),
                widget.Sep(
                         linewidth = 1,
                         padding = 5,
                         ),
-				# widget.Net(
-						# #fontsize=14,
-						# #fmt='{}',
-						# interface='enp3s0',
-						# format='{interface}:{down}↓{up}↑'
-						# ),
-			# widget.Notify(fmt="🔥 {}"),
+				#widget.Notify(fmt="🔥 {}"),
                 widget.ThermalSensor(
 						fmt = "🌡 {}",
-						#show_tag = 'true',
-						#tag_sensor = "GPU",
-						foreground_alert = 'D08770',
+						foreground_alert = colors[13],
 						),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
                         ),
                 widget.CPU(
-						#foreground = '88c0d0',
-						format = ' {load_percent}%',
+						fmt = ' {}',
+						format = '{load_percent}%',
 						),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
-                        ),			
-				# widget.TextBox(
-                        # text="MEM",
-                        # ),
+                        ),
 				widget.Memory(
-                        format = ' {MemUsed}M',
-                        #foreground = '88c0d0',
+						fmt = ' {}',
+                        format = '{MemUsed}M',
                         padding = 5,
                         ),
 				widget.Sep(
 						linewidth = 1,
 						padding = 5,
 						),
-				# widget.KeyboardLayout(
-						# ),
-				# widget.Sep(
-						# linewidth = 1,
-						# padding = 5,
-						# ),
                  widget.CheckUpdates(
 						 distro = "Arch",
 						 custom_command = 'checkupdates',
-                         #execute = "xfce4-terminal -x sudo pacman -Syyu",
-						 update_interval = 1600,
+						 update_interval = 300,
 						 display_format = '📦 {updates}',
 						 no_update_string = '📦 0',
 						 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -x sudo pacman -Syyu')},
@@ -310,23 +263,15 @@ screens = [
                         linewidth = 1,
                         padding = 5,
                         ),
-                # widget.Backlight(
-						# backlight_name="intel_backlight",
-						# format="{percent:2.0%}",
-						# ),
                widget.Systray(padding=5),
-               # widget.Notify(
-						# fmt=" 🔥 {} ",
-						# default_timeout = 5,
-						# ),
                widget.Sep(
                         linewidth = 1,
                         padding = 5,
                         ),
                 widget.Clock(
-                padding=5,
-                format='%a %b %d, %H:%M'
-                ),
+						padding=5,
+						format='%a %b %d, %H:%M'
+						),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
@@ -334,7 +279,7 @@ screens = [
                 widget.CurrentLayoutIcon(scale=0.6),
 
             ],
-            size=28,
+            30,
         ),
     ),
 ]
@@ -355,14 +300,10 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 
-# @hook.subscribe.client_new
-# def set_floating(window):
-    # if (window.window.get_wm_transient_for()
-            # or window.window.get_wm_type() in floating_types):
-        # window.floating = True
-
 floating_layout = layout.Floating(
-	**layout_theme,
+	border_focus = "#d08770",
+	border_width = 4,
+	border_normal = "#616E88",
 	float_rules=[
     # Run the utility of `xprop` to see the wm class and name of an X client.
     *layout.Floating.default_float_rules,
@@ -372,41 +313,29 @@ floating_layout = layout.Floating(
     Match(wm_class='ssh-askpass'),  # ssh-askpass
     Match(title='branchdialog'),  # gitk
     Match(title='pinentry'),  # GPG key password entry
+    Match(wm_class='Galculator'),
+    Match(wm_class='confirm'),
+    Match(wm_class='dialog'),
+    Match(wm_class='download'),
+    Match(wm_class='error'),
+    Match(wm_class='file_progress'),
+    Match(wm_class='notification'),
+    Match(wm_class='splash'),
+	Match(wm_class='toolbar'),
+	Match(wm_class='Arandr'),
+	Match(wm_class='Xephyr'),
+	Match(wm_class='Library'),
+	Match(title='Library'),
+	Match(title='utility'),
+	Match(title='notification'),
+	Match(title='toolbar'),
+	Match(title='splash'),
+	Match(title='dialog'),
+	Match(title='Open File'),
+	Match(title='About Mozilla Firefox'),
+	Match(title='pamac-manager'),
 ])
 
-# floating_types = ["notification", "toolbar", "splash", "dialog"]
-
-# floating_layout = layout.Floating(
-	# **layout_theme,
-	# float_rules=[
-	# {'wmclass': 'confirm'},
-	# {'wmclass': 'dialog'},
-	# {'wmclass': 'download'},
-	# {'wmclass': 'error'},
-	# {'wmclass': 'file_progress'},
-	# {'wmclass': 'notification'},
-	# {'wmclass': 'splash'},
-	# {'wmclass': 'toolbar'},
-	# {'wmclass': 'Arandr'},	#added from acrolinux
-	# {'wmclass': 'confirmreset'},  # gitk
-	# {'wmclass': 'makebranch'},  # gitk
-	# {'wmclass': 'maketag'},  # gitk
-	# {'wmclass': 'Galculator'},
-	# {'wmclass': 'Xephyr'},
-	# {'wmclass': 'Library'},
-	# {'wname': 'Library'},
-	# {'wname': 'utility'},
-	# {'wname': 'notification'},
-	# {'wname': 'toolbar'},
-	# {'wname': 'splash'},
-	# {'wname': 'dialog'},
-    # {'wname': 'Open File'},
-    # {'wname': 'About Mozilla Firefox'},
-    # {'wname': 'pamac-manager'},     	#added from acrolinux
-    # {'wname': 'branchdialog'},  # gitk
-    # {'wname': 'pinentry'},  # GPG key password entry
-    # {'wmclass': 'ssh-askpass'},  # ssh-askpass
-# ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
@@ -424,5 +353,4 @@ def start_once():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-#wmname = "LG3D"
-wmname = "qtile"
+wmname = "LG3D"
