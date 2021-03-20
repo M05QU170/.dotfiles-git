@@ -45,6 +45,8 @@ rofiwindowswitcher = "rofi -show window -modi window -cycle -show-icons -display
 
 terminal = "xfce4-terminal"
 
+calendar = "gsimplecal"
+
 mod = "mod4"
 
 alt = "mod1"
@@ -87,24 +89,25 @@ keys = [
         desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
-    # Key([mod, "shift"], "g", lazy.layout.grow()),
-	# Key([mod, "shift"], "s", lazy.layout.shrink()),
+    #Key([mod, "control"], "h", lazy.layout.grow()),
+	#Key([mod, "control"], "l", lazy.layout.shrink()),
 	Key([mod, "shift"], "n", lazy.layout.normalize()),
 	Key([mod, "shift"], "m", lazy.layout.maximize()),
 
     # Swap panes of split stack
-    #Key([mod, "shift"], "space", lazy.layout.rotate()),
+	#Key([mod, "shift"], "space", lazy.layout.rotate()),
     Key([mod, "shift"], "space", lazy.layout.flip()), 
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayedgggggsssg
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+    #Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(terminal)),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
+    
     Key([mod, "shift"], "c", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
@@ -269,7 +272,8 @@ screens = [
                         ),
                 widget.Clock(
 						padding=5,
-						format='%a %b %d, %H:%M'
+						format='%a %b %d, %H:%M',
+						mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(calendar)},
 						),
 				widget.Sep(
                         linewidth = 1,
@@ -333,6 +337,7 @@ floating_layout = layout.Floating(
 	Match(title='Open File'),
 	Match(title='About Mozilla Firefox'),
 	Match(title='pamac-manager'),
+	Match(title='gsimplecal'),
 ])
 
 auto_fullscreen = True
