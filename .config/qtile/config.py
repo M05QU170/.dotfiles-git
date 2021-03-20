@@ -24,13 +24,37 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import os, subprocess
+# import os, subprocess
+# import re
+# import socket
+# from libqtile import qtile
+# from libqtile.config import Key, Screen, Group, Drag, Click, Match
+# from libqtile.command import lazy
+# from libqtile import layout, bar, widget, hook, extension
+# from typing import List  # noqa: F401
+
+# from subprocess import CalledProcessError
+
+# from libqtile.log_utils import logger
+# from libqtile.utils import (
+    # UnixCommandNotFound,
+    # UnixCommandRuntimeError,
+    # catch_exception_and_warn,
+    # guess_terminal,
+# )
+# from libqtile.widget import base
+
+import os
 import re
 import socket
-from libqtile.config import Key, Screen, Group, Drag, Click
+import subprocess
+from libqtile import qtile
+from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
 from libqtile.command import lazy
-from libqtile import layout, bar, widget, hook, extension
-from typing import List  # noqa: F401
+from libqtile import layout, bar, widget, hook
+from libqtile.lazy import lazy
+from typing import List
+
 
 homedir = os.path.expanduser('~')
 configdir = [ homedir + '/.config/qtile' ]
@@ -62,26 +86,11 @@ keys = [
     Key([mod], "j", lazy.layout.up()),
 	Key([mod], "k", lazy.layout.down()),
     Key([mod], "l", lazy.layout.right()),
-
-
-	# Key([mod, "shift"], "j", lazy.layout.flip_down()),
-	# Key([mod, "shift"], "k", lazy.layout.flip_up()),
-	# Key([mod, "shift"], "h", lazy.layout.flip_left()),
-	# Key([mod, "shift"], "l", lazy.layout.flip_right()),
 	
 	Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
 	Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
 	Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 	Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
-	
-	# Key([mod, alt], "h", lazy.layout.grow_left()),
-    # Key([mod, alt], "l", lazy.layout.grow_right()),
-    # Key([mod, alt], "j", lazy.layout.grow_down()),
-    # Key([mod, alt], "k", lazy.layout.grow_up()),
-
-    # Move windows up or down in current stack
-    # Key([mod, "control"], "k", lazy.layout.shuffle_down()),
-    # Key([mod, "control"], "j", lazy.layout.shuffle_up()),
 
     # Switch window focus to other pane(s) of stack
     Key([mod], "Tab", lazy.layout.next()),
@@ -89,8 +98,18 @@ keys = [
 
 	Key([mod], "n", lazy.window.toggle_minimize()),
 
-    Key([mod, "shift"], "g", lazy.layout.grow()),
-	Key([mod, "shift"], "s", lazy.layout.shrink()),
+    # Grow windows. If current window is on the edge of screen and direction
+    # will be to screen edge - window would shrink.
+    Key([mod, "control"], "h", lazy.layout.grow_left(),
+        desc="Grow window to the left"),
+    Key([mod, "control"], "l", lazy.layout.grow_right(),
+        desc="Grow window to the right"),
+    Key([mod, "control"], "j", lazy.layout.grow_down(),
+        desc="Grow window down"),
+    Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
+
+    # Key([mod, "shift"], "g", lazy.layout.grow()),
+	# Key([mod, "shift"], "s", lazy.layout.shrink()),
 	Key([mod, "shift"], "n", lazy.layout.normalize()),
 	Key([mod, "shift"], "m", lazy.layout.maximize()),
 
@@ -122,7 +141,7 @@ keys = [
     Key([mod], 'm', lazy.spawn("morc_menu")),
     Key([mod], "t", lazy.spawncmd()),
 
-    Key([], 'Print', lazy.spawn("scrot '%S.png' -e 'mv $f $$(xdg-user-dir PICTURES)/Screenshots/Manjaro-%S-$wx$h.png ; feh $$(xdg-user-dir PICTURES)/Screenshots/Manjaro-%S-$wx$h.png'")),
+    Key([], 'Print', lazy.spawn("scrot '%S.png' -e 'mv $f $$(xdg-user-dir PICTURES)/Screenshots/Arch-%S-$wx$h.png ; feh $$(xdg-user-dir PICTURES)/Screenshots/Arch-%S-$wx$h.png'")),
 	
 ]
 
@@ -143,6 +162,7 @@ layout_theme = {
     "markup": "true",
     "border_focus": "#5e81ac",
     "border_normal": "#4C566A",
+    "border_focus_stack": '#D08770',
     "auto_float_types": {'toolbar', 'utility', 'splash', 'dialog', 'notification'}
     }
 
@@ -219,9 +239,8 @@ screens = [
                          visual_bell_color	= 'bf616a'
                         ),
 				#widget.WindowName(),
-						
                 widget.TaskList(
-                    icon_size=18,
+						icon_size=18,
 						txt_floating=" ",
 						txt_maximized=" ",
 						txt_minimized=" ",
@@ -231,25 +250,27 @@ screens = [
 						urgent_border='bf616a',
                         ),
 				#widget.Sep(),
-				# widget.Net(
-						# #fontsize=14,
-						# interface='wlp2s0',
-						# format='{down}↓↑{up}'
-						# ),
                widget.Sep(
-                        linewidth = 0,
+                        linewidth = 1,
                         padding = 5,
                         ),
-               # widget.TextBox(
-                        # text="CPU",
-                        # #fontsize = 12,
-                        # padding = 0,
-                        # ),
-				# widget.CPUGraph(
-                         # width = 50,
-                         # line_width = 2,
-                         # type = 'line',
-                        # ),
+				# widget.Net(
+						# #fontsize=14,
+						# #fmt='{}',
+						# interface='enp3s0',
+						# format='{interface}:{down}↓{up}↑'
+						# ),
+			# widget.Notify(fmt="🔥 {}"),
+                widget.ThermalSensor(
+						fmt = "🌡 {}",
+						#show_tag = 'true',
+						#tag_sensor = "GPU",
+						foreground_alert = 'D08770',
+						),
+				widget.Sep(
+                        linewidth = 1,
+                        padding = 5,
+                        ),
                 widget.CPU(
 						#foreground = '88c0d0',
 						format = ' {load_percent}%',
@@ -276,23 +297,15 @@ screens = [
 						# linewidth = 1,
 						# padding = 5,
 						# ),
-				widget.TextBox(
-                         text="📦",
-                         ),
-				widget.Pacman(
-                       execute = 'xfce4-terminal',
-                       update_interval = 600,
-                       #foreground = 'A3BE8C',
-                       #unavailable = 'D08770',
-                       ),
-                # widget.CheckUpdates(
-						 # #colour_have_updates = 'D08770',#"A3BE8C",
-						 # custom_command = 'checkupdates',
-                                                 # execute = "xfce4-terminal",
-						 # update_interval = 600,
-						 # display_format = '📦 {updates}'
-                                                 # # #colour_no_updates = 'D08770',
-						# ),
+                 widget.CheckUpdates(
+						 distro = "Arch",
+						 custom_command = 'checkupdates',
+                         #execute = "xfce4-terminal -x sudo pacman -Syyu",
+						 update_interval = 1600,
+						 display_format = '📦 {updates}',
+						 no_update_string = '📦 0',
+						 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -x sudo pacman -Syyu')},
+						 ),
 				widget.Sep(
                         linewidth = 1,
                         padding = 5,
@@ -313,7 +326,6 @@ screens = [
                 widget.Clock(
                 padding=5,
                 format='%a %b %d, %H:%M'
-                #format='%Y-%m-%d %a %I:%M %p'
                 ),
 				widget.Sep(
                         linewidth = 1,
@@ -343,41 +355,58 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 
-@hook.subscribe.client_new
-def set_floating(window):
-    if (window.window.get_wm_transient_for()
-            or window.window.get_wm_type() in floating_types):
-        window.floating = True
-
-
-floating_types = ["notification", "toolbar", "splash", "dialog"]
+# @hook.subscribe.client_new
+# def set_floating(window):
+    # if (window.window.get_wm_transient_for()
+            # or window.window.get_wm_type() in floating_types):
+        # window.floating = True
 
 floating_layout = layout.Floating(
 	**layout_theme,
 	float_rules=[
-	{'wmclass': 'confirm'},
-	{'wmclass': 'dialog'},
-	{'wmclass': 'download'},
-	{'wmclass': 'error'},
-	{'wmclass': 'file_progress'},
-	{'wmclass': 'notification'},
-	{'wmclass': 'splash'},
-	{'wmclass': 'toolbar'},
-	{'wmclass': 'Arandr'},	#added from acrolinux
-	{'wmclass': 'confirmreset'},  # gitk
-	{'wmclass': 'makebranch'},  # gitk
-	{'wmclass': 'maketag'},  # gitk
-	{'wmclass': 'Galculator'},
-	{'wmclass': 'Xephyr'},
-	{'wmclass': 'Library'},
-	{'wname': 'Library'},
-    {'wname': 'Open File'},
-    {'wname': 'About Mozilla Firefox'},
-    {'wname': 'pamac-manager'},     	#added from acrolinux
-    {'wname': 'branchdialog'},  # gitk
-    {'wname': 'pinentry'},  # GPG key password entry
-    {'wmclass': 'ssh-askpass'},  # ssh-askpass
+    # Run the utility of `xprop` to see the wm class and name of an X client.
+    *layout.Floating.default_float_rules,
+    Match(wm_class='confirmreset'),  # gitk
+    Match(wm_class='makebranch'),  # gitk
+    Match(wm_class='maketag'),  # gitk
+    Match(wm_class='ssh-askpass'),  # ssh-askpass
+    Match(title='branchdialog'),  # gitk
+    Match(title='pinentry'),  # GPG key password entry
 ])
+
+# floating_types = ["notification", "toolbar", "splash", "dialog"]
+
+# floating_layout = layout.Floating(
+	# **layout_theme,
+	# float_rules=[
+	# {'wmclass': 'confirm'},
+	# {'wmclass': 'dialog'},
+	# {'wmclass': 'download'},
+	# {'wmclass': 'error'},
+	# {'wmclass': 'file_progress'},
+	# {'wmclass': 'notification'},
+	# {'wmclass': 'splash'},
+	# {'wmclass': 'toolbar'},
+	# {'wmclass': 'Arandr'},	#added from acrolinux
+	# {'wmclass': 'confirmreset'},  # gitk
+	# {'wmclass': 'makebranch'},  # gitk
+	# {'wmclass': 'maketag'},  # gitk
+	# {'wmclass': 'Galculator'},
+	# {'wmclass': 'Xephyr'},
+	# {'wmclass': 'Library'},
+	# {'wname': 'Library'},
+	# {'wname': 'utility'},
+	# {'wname': 'notification'},
+	# {'wname': 'toolbar'},
+	# {'wname': 'splash'},
+	# {'wname': 'dialog'},
+    # {'wname': 'Open File'},
+    # {'wname': 'About Mozilla Firefox'},
+    # {'wname': 'pamac-manager'},     	#added from acrolinux
+    # {'wname': 'branchdialog'},  # gitk
+    # {'wname': 'pinentry'},  # GPG key password entry
+    # {'wmclass': 'ssh-askpass'},  # ssh-askpass
+# ])
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
@@ -395,4 +424,5 @@ def start_once():
 #
 # We choose LG3D to maximize irony: it is a 3D non-reparenting WM written in
 # java that happens to be on java's whitelist.
-wmname = "LG3D"
+#wmname = "LG3D"
+wmname = "qtile"
