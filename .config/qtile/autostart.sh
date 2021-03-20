@@ -12,6 +12,7 @@ variety &
 setxkbmap -layout gb &
 #pamac-tray &
 volumeicon &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
 xfsettingsd &
 xfce4-volumed-pulse &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
