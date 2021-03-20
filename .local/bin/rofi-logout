@@ -8,14 +8,15 @@ case $question in
     *Lock)
         #i3lock-fancy
         #slock
-	xflock4
-	;;
+		xflock4
+		;;
     *Logout)
         #pkill -9 -u $USER
         #pkill -15 -u $USER
-	loginctl terminate-user $USER
-	#loginctl kill-user --signal=SIGTERM $USER
-	;;
+		#loginctl terminate-user $USER
+		#loginctl kill-user --signal=SIGTERM $USER
+		session-logout
+		;;
     *Reboot)
         systemctl -i reboot
         ;;
@@ -24,9 +25,9 @@ case $question in
         ;;
     *Suspend)
         #i3lock-fancy && systemctl suspend
-	#systemctl -i suspend && slock 
-	systemctl -i suspend
-	;;
+		#systemctl -i suspend && slock 
+		systemctl -i suspend
+		;;
     *)
         exit 0  # do nothing on wrong response
         ;;
