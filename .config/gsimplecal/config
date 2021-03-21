@@ -1,0 +1,15 @@
+show_timezones = 1
+show_week_numbers = 0
+mark_today = 1
+close_on_unfocus = 0
+mainwindow_resizable = 0
+mainwindow_sticky = 1
+clock_label = England
+clock_tz = :Europe/London
+mainwindow_decorated = 0
+mainwindow_keep_above = 1
+mainwindow_skip_taskbar = 0
+mainwindow_position = none
+mainwindow_yoffset = 30
+mainwindow_xoffset = 1675
+clock_format = %a %d %b %H:%M
