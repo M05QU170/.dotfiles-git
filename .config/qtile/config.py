@@ -266,6 +266,7 @@ screens = [
                         padding = 5,
                         ),
                widget.Systray(padding=5),
+               widget.Sep(linewidth = 0, padding=4),
                widget.Sep(
                         linewidth = 1,
                         padding = 5,
@@ -280,7 +281,6 @@ screens = [
                         padding = 5,
                         ),
                 widget.CurrentLayoutIcon(scale=0.6),
-
             ],
             30,
         ),
