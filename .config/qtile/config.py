@@ -28,12 +28,20 @@ import os
 import re
 import socket
 import subprocess
+
+import iwlib
+
+from libqtile.log_utils import logger
+
+from libqtile.widget import base
+
+from typing import List  # noqa: F401
+
 from libqtile import qtile
 from libqtile.config import Click, Drag, Group, KeyChord, Key, Match, Screen
 from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
-from typing import List
 
 
 homedir = os.path.expanduser('~')
@@ -46,6 +54,12 @@ rofiwindowswitcher = "rofi -show window -modi window -cycle -show-icons -display
 terminal = "xfce4-terminal"
 
 calendar = "gsimplecal"
+
+GREEN = "#a3be8c"
+PINK = "#b48ead"
+RED = "#F1FA8C"
+YELLOW = "#ebcb8b"
+ORANGE = "#d08770"
 
 mod = "mod4"
 
@@ -60,24 +74,24 @@ keys = [
     Key([], "XF86AudioPlay", lazy.spawn("playerctl play-pause")),
     Key([], "XF86AudioNext", lazy.spawn("playerctl next")),
     Key([], "XF86AudioPrev", lazy.spawn("playerctl previous")),
-   # Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
+    # Key([], "XF86AudioStop", lazy.spawn("playerctl stop")),
 
     # Switch between windows in current stack pane
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "j", lazy.layout.up()),
-	Key([mod], "k", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.down()),
     Key([mod], "l", lazy.layout.right()),
-	
-	Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
-	Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
-	Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
-	Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
+
+    Key([mod, "shift"], "h", lazy.layout.shuffle_left()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "l", lazy.layout.shuffle_right()),
 
     # Switch window focus to other pane(s) of stack
     Key([mod], "Tab", lazy.layout.next()),
     Key([mod, "control"], "Tab", lazy.spawn(rofiwindowswitcher)),
 
-	Key([mod], "n", lazy.window.toggle_minimize()),
+    Key([mod], "n", lazy.window.toggle_minimize()),
 
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
@@ -89,43 +103,45 @@ keys = [
         desc="Grow window down"),
     Key([mod, "control"], "k", lazy.layout.grow_up(), desc="Grow window up"),
 
-    #Key([mod, "control"], "h", lazy.layout.grow()),
-	#Key([mod, "control"], "l", lazy.layout.shrink()),
-	Key([mod, "shift"], "n", lazy.layout.normalize()),
-	Key([mod, "shift"], "m", lazy.layout.maximize()),
+    Key([mod, "control"], "g", lazy.layout.grow()),
+    Key([mod, "control"], "s", lazy.layout.shrink()),
+    Key([mod, "shift"], "n", lazy.layout.normalize()),
+    Key([mod, "shift"], "m", lazy.layout.maximize()),
 
     # Swap panes of split stack
-	#Key([mod, "shift"], "space", lazy.layout.rotate()),
+    #Key([mod, "shift"], "space", lazy.layout.rotate()),
     Key([mod, "shift"], "space", lazy.layout.flip()), 
 
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayedgggggsssg
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
-    #Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
+#Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
     Key([mod], "Return", lazy.spawn(terminal)),
 
     # Toggle between different layouts as defined below
     Key([mod], "space", lazy.next_layout()),
-    
+
     Key([mod, "shift"], "c", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
     #Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod, "control"], "q", lazy.spawn("rofi-logout")),
-    
-	# dmenu_recency config sits at ~/.config/dmenu_recency/.dmenurc
-	Key([mod], 'p', lazy.spawn("dmenu_recency")),
-	#Key([mod], 'r', lazy.spawn("rofi -show drun -show-icons")),
 
-	Key([mod], 'r', lazy.spawn(rofimenu)),
-	#Key([mod], 'r', lazy.spawn("rofi_run -r")),
+        # dmenu_recency config sits at ~/.config/dmenu_recency/.dmenurc
+        Key([mod], 'p', lazy.spawn("dmenu_recency")),
+        #Key([mod], 'r', lazy.spawn("rofi -show drun -show-icons")),
+
+        Key([mod], 'r', lazy.spawn(rofimenu)),
+        #Key([mod], 'r', lazy.spawn("rofi_run -r")),
     Key([mod], 'm', lazy.spawn("morc_menu")),
     Key([mod], "t", lazy.spawncmd()),
 
     Key([], 'Print', lazy.spawn("scrot '%S.png' -e 'mv $f $$(xdg-user-dir PICTURES)/Arch-%S-$wx$h.png ; feh $$(xdg-user-dir PICTURES)/Arch-%S-$wx$h.png'")),
-	
+
 ]
+
+
 
 groups = [Group(i) for i in "12345678"]
 
@@ -136,156 +152,178 @@ for i in groups:
 
         # mod1 + shift + letter of group = switch to & move focused window to group
         Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-    ])
+        ])
 
-layout_theme = {
-    "border_width": 4,
-    "margin": 4,
-    "markup": "true",
-    "border_focus": "#5e81ac",
-    "border_normal": "#616E88",
-    "border_focus_stack": '#ebcb8b',
-    }
+    layout_theme = {
+            "border_width": 4,
+            "margin": 4,
+            "markup": "true",
+            "border_focus": YELLOW,
+            "border_normal": "#616E88",
+            "border_focus_stack": '#ebcb8b',
+            }
 
-layouts = [
-	layout.MonadTall(**layout_theme),
-	layout.MonadWide(**layout_theme),
-	layout.Max(**layout_theme),
-	layout.Floating(**layout_theme),
-	layout.Columns(**layout_theme),
-	layout.VerticalTile(**layout_theme),
+    layouts = [
+            layout.MonadTall(**layout_theme),
+            layout.MonadWide(**layout_theme),
+            layout.Max(**layout_theme),
+            layout.Floating(**layout_theme),
+            layout.Columns(**layout_theme),
+            layout.VerticalTile(**layout_theme),
+            layout.Bsp(**layout_theme),
 
-	#layout.RatioTile(**layout_theme),
-	#layout.Stack(num_stacks=2, **layout_theme),
-	#layout.Tile(shift_windows=True, **layout_theme),
+            #layout.RatioTile(**layout_theme),
+            #layout.Stack(num_stacks=2, **layout_theme),
+            #layout.Tile(shift_windows=True, **layout_theme),
 
-]
+            ]
 
 
-# COLORS FOR THE BAR
+
+    # COLORS FOR THE BAR
 
 colors = [["#2e3440", "#2e3440"], # 0 Nord Polar Night Darkest
-          ["#3b4252", "#3b4252"], # 1 Nord Polar Night Dark Light 
-          ["#434c5e", "#434c5e"], # 2 Nord Polar Night Dark Lighter
-          ["#4c566a", "#4c566a"], # 3 Nord Polar Night Dark Lightest
-          ["#616E88", "#616E88"], # 4 Nord Polar Night Dark Lightest 2
-          ["#d8dee9", "#d8dee9"], # 5 Nord Snow Storm White Dark
-          ["#e5e9f0", "#e5e9f0"], # 6 Nord Snow Storm White Lighter
-          ["#eceff4", "#eceff4"], # 7 Nord Snow Storm White Lightest
-          ["#8fbcbb", "#8fbcbb"], # 8 Nord Frost Greenish
-          ["#88c0d0", "#88c0d0"], # 9 Nord Frost GreenBlue
-          ["#81a1c1", "#81a1c1"], # 10 Nord Frost Blueish
-          ["#5e81ac", "#5e81ac"], # 11 Nord Frost Blue
-          ["#bf616a", "#bf616a"], # 12 Nord Aurora Red
-          ["#d08770", "#d08770"], # 13 Nord Aurora Orange
-          ["#ebcb8b", "#ebcb8b"], # 14 Nord Aurora Yellow
-          ["#a3be8c", "#a3be8c"], # 15 Nord Aurora Green
-          ["#b48ead", "#b48ead"]] # 16 Nord Aurora Pink
+        ["#3b4252", "#3b4252"], # 1 Nord Polar Night Dark Light 
+        ["#434c5e", "#434c5e"], # 2 Nord Polar Night Dark Lighter
+        ["#4c566a", "#4c566a"], # 3 Nord Polar Night Dark Lightest
+        ["#616E88", "#616E88"], # 4 Nord Polar Night Dark Lightest 2
+        ["#d8dee9", "#d8dee9"], # 5 Nord Snow Storm White Dark
+        ["#e5e9f0", "#e5e9f0"], # 6 Nord Snow Storm White Lighter
+        ["#eceff4", "#eceff4"], # 7 Nord Snow Storm White Lightest
+        ["#8fbcbb", "#8fbcbb"], # 8 Nord Frost Greenish
+        ["#88c0d0", "#88c0d0"], # 9 Nord Frost GreenBlue
+        ["#81a1c1", "#81a1c1"], # 10 Nord Frost Blueish
+        ["#5e81ac", "#5e81ac"], # 11 Nord Frost Blue
+        ["#bf616a", "#bf616a"], # 12 Nord Aurora Red
+        ["#d08770", "#d08770"], # 13 Nord Aurora Orange
+        ["#ebcb8b", "#ebcb8b"], # 14 Nord Aurora Yellow
+        ["#a3be8c", "#a3be8c"], # 15 Nord Aurora Green
+        ["#b48ead", "#b48ead"]] # 16 Nord Aurora Pink
+
 
 
 
 widget_defaults = dict(
-    font='Monospace',
-    fontsize=14,
-    padding=4,
-    background=colors[0],
-    foreground=colors[7]
-)
+        font='Source Code Pro Black',
+        fontsize=15,
+        padding=4,
+        background=colors[0],
+        foreground=colors[7]
+        )
 extension_defaults = widget_defaults.copy()
 
-screens = [
-    Screen(
-        top=bar.Bar(
+
+top=bar.Bar(
+	[
+		widget.GroupBox(
+			this_current_screen_border=YELLOW,
+			padding_y = 5,
+			padding_x = 5,
+			inactive = colors[4],
+			urgent_border = colors[12],
+			urgent_text = colors[12]
+			),
+		widget.Prompt(
+			prompt="run: ",
+			background=colors[4],
+			bell_style='visual',
+			ignore_dups_history=True,
+			visual_bell_color=colors[12]
+			),
+		widget.TaskList(
+			icon_size=18,
+			txt_floating=" ",
+			txt_maximized=" ",
+			txt_minimized=" ",
+			max_title_width = 300,
+			border=YELLOW,
+			urgent_border=colors[12],
+			),
+		widget.Pomodoro(
+			num_pomodori=4,
+			length_pomodori=25,
+			length_short_break=5,
+			length_long_break=15,
+			color_inactive=colors[14],
+			color_break=colors[15],
+			color_active=colors[12],
+			notification_on=True,
+			prefix_inactive="🍅",
+			prefix_active="🍅 ",
+			prefix_break="☕ ",
+			prefix_long_break="☕ ",
+			prefix_paused="🍅 PAUSED",
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.ThermalSensor(
+			fmt = " {}", # 🌡
+			foreground_alert = colors[13],
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.CPU(
+			fmt = ' {}',
+			format = '{load_percent}%',
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.Memory(
+			fmt = ' {}',
+			format = '{MemUsed}M',
+			padding = 5,
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.CheckUpdates(
+			distro = "Arch",
+			custom_command = 'checkupdates',
+			update_interval = 300,
+			display_format = '📦 {updates}',
+			no_update_string = '📦 0',
+			mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -x sudo pacman -Syyu')},
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		#widget.KeyboardLayout(keymap='gb'),
+		#widget.Sep(linewidth = 1,padding = 5,),
+		widget.Systray(padding=5),
+        widget.Sep(linewidth = 0, padding=4),
+        widget.Sep(linewidth = 1,padding = 5,),
+		widget.Clock(
+			padding=5,
+			format='%a %b %d, %H:%M',
+			mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(calendar)},
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+        widget.CurrentLayoutIcon(scale=0.65),
+       ],
+       30,
+)
 
 
-            [
-                widget.GroupBox(
-						this_current_screen_border=colors[11],
-						padding_y = 5,
-                        padding_x = 5,
-                        inactive = colors[4],
-                        urgent_border = colors[12],
-                        urgent_text = colors[12]
-						),
-                widget.Prompt(
-                    prompt="run: ",
-						 background=colors[4],
-						 bell_style='visual',
-                         ignore_dups_history=True,
-                         visual_bell_color	= colors[12]
-                        ),
-                widget.TaskList(
-						icon_size=18,
-						txt_floating=" ",
-						txt_maximized=" ",
-						txt_minimized=" ",
-                        max_title_width = 300,
-						border=colors[11],
-						urgent_border=colors[12],
-                        ),
-               widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-				#widget.Notify(fmt="🔥 {}"),
-                widget.ThermalSensor(
-						fmt = "🌡 {}",
-						foreground_alert = colors[13],
-						),
-				widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-                widget.CPU(
-						fmt = ' {}',
-						format = '{load_percent}%',
-						),
-				widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-				widget.Memory(
-						fmt = ' {}',
-                        format = '{MemUsed}M',
-                        padding = 5,
-                        ),
-				widget.Sep(
-						linewidth = 1,
-						padding = 5,
-						),
-                 widget.CheckUpdates(
-						 distro = "Arch",
-						 custom_command = 'checkupdates',
-						 update_interval = 300,
-						 display_format = '📦 {updates}',
-						 no_update_string = '📦 0',
-						 mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(terminal + ' -x sudo pacman -Syyu')},
-						 ),
-				widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-               widget.Systray(padding=5),
-               widget.Sep(linewidth = 0, padding=4),
-               widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-                widget.Clock(
-						padding=5,
-						format='%a %b %d, %H:%M',
-						mouse_callbacks = {'Button1': lambda: qtile.cmd_spawn(calendar)},
-						),
-				widget.Sep(
-                        linewidth = 1,
-                        padding = 5,
-                        ),
-                widget.CurrentLayoutIcon(scale=0.6),
-            ],
-            30,
-        ),
-    ),
-]
+# bottom = bar.Bar(
+		# [
+		# widget.Sep(linewidth = 1,padding = 5,),
+		# widget.DF(
+			# fmt='root {}',
+			# measure='G',
+			# format='{p} ({uf}{m}|{r:.0f}%)',
+			# partition='/',
+			# warn_color=YELLOW,
+			# ),
+		# widget.Sep(linewidth = 1,padding = 5,),
+		# widget.Wlan(
+			# fmt='WIFI:{}',
+			# interface='wlan0',
+			# format='{essid} {percent:2.0%}',
+			# ),
+		# widget.Sep(linewidth = 1,padding = 5,),
+		# widget.Net(interface='enp3s0'),
+		# widget.Notify(fmt="🔥 {}"),
+		# widget.Spacer(),
+		# widget.KeyboardLayout(),
+		# ],
+		# 30,
+	# )
+							
+screens = [ Screen(top=top) ]#,bottom=bottom), ]
+
 
 # Drag floating layouts.
 mouse = [
@@ -304,7 +342,7 @@ bring_front_click = False
 cursor_warp = False
 
 floating_layout = layout.Floating(
-	border_focus = "#d08770",
+	border_focus = ORANGE,
 	border_width = 4,
 	border_normal = "#616E88",
 	float_rules=[
