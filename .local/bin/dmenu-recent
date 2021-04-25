@@ -7,7 +7,7 @@ fi
 . $HOME/.config/dmenu_recency/dmenurc
 
 
-term="alacritty -e"
+term="xfce4-terminal -x"
 cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
 cache="$cachedir/dmenu_recent"
 

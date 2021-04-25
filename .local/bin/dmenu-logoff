@@ -3,13 +3,14 @@
   . $HOME/.config/dmenu_recency/dmenurc
 
 
-menu_list="cancel\nsuspend\nshutdown\nreboot\nlock"
-sel=$(echo -e "$menu_list" | dmenu $@ -i -l 5 $DMENU_OPTIONS)
+menu_list="cancel\nsuspend\nshutdown\nreboot\nlogout\nlock"
+sel=$(echo -e "$menu_list" | dmenu $@ -i -l 6 $DMENU_OPTIONS)
 
 case "$sel" in
     cancel)   exit ;;
     suspend)  systemctl suspend && slock & ;;
     shutdown) systemctl poweroff & ;;
     reboot)   systemctl reboot & ;;
+    logout)   session-logout & ;;
     lock)     slock & ;;
 esac
