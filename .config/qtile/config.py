@@ -43,6 +43,9 @@ from libqtile.command import lazy
 from libqtile import layout, bar, widget, hook
 from libqtile.lazy import lazy
 
+#from os import getenv, path
+from subprocess import call, check_output
+
 
 homedir = os.path.expanduser('~')
 configdir = [ homedir + '/.config/qtile' ]
@@ -60,6 +63,13 @@ PINK = "#b48ead"
 RED = "#F1FA8C"
 YELLOW = "#ebcb8b"
 ORANGE = "#d08770"
+
+class Commands:
+	
+	def get_kernel_release(self):
+		return check_output(['uname', '-r']).decode("utf-8").replace("\n", "")
+
+commands = Commands()
 
 mod = "mod4"
 
@@ -223,6 +233,7 @@ top=bar.Bar(
 			urgent_border = colors[12],
 			urgent_text = colors[12]
 			),
+		widget.Sep(linewidth = 1,padding = 5,),
 		widget.Prompt(
 			prompt="run: ",
 			background=colors[4],
@@ -239,6 +250,7 @@ top=bar.Bar(
 			border=YELLOW,
 			urgent_border=colors[12],
 			),
+		widget.Sep(linewidth = 1,padding = 5,),
 		widget.Pomodoro(
 			num_pomodori=4,
 			length_pomodori=25,
@@ -297,32 +309,46 @@ top=bar.Bar(
 )
 
 
-# bottom = bar.Bar(
-		# [
-		# widget.Sep(linewidth = 1,padding = 5,),
-		# widget.DF(
-			# fmt='root {}',
-			# measure='G',
-			# format='{p} ({uf}{m}|{r:.0f}%)',
-			# partition='/',
-			# warn_color=YELLOW,
-			# ),
-		# widget.Sep(linewidth = 1,padding = 5,),
-		# widget.Wlan(
-			# fmt='WIFI:{}',
-			# interface='wlan0',
-			# format='{essid} {percent:2.0%}',
-			# ),
-		# widget.Sep(linewidth = 1,padding = 5,),
-		# widget.Net(interface='enp3s0'),
-		# widget.Notify(fmt="🔥 {}"),
-		# widget.Spacer(),
-		# widget.KeyboardLayout(),
-		# ],
-		# 30,
-	# )
+bottom = bar.Bar(
+		[
+		widget.Wlan(
+			fmt='WIFI:{}',
+			interface='wlan0',
+			format='{essid} {percent:2.0%}',
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.TextBox(text=commands.get_kernel_release(),),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.Net(interface='enp3s0'),
+		widget.Sep(linewidth = 1,padding = 5,),
+#		widget.Notify(fmt="🔥 {}",default_timeout=5,),
+		widget.Spacer(),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.DF(
+			fmt='root {}',
+			measure='G',
+			format='({uf}{m}|{r:.0f}%)',
+			#format='{s}{m}/{f}{m}',
+			partition='/',
+			visible_on_warn=False,
+			warn_color=YELLOW,
+			),
+		widget.Sep(linewidth = 1,padding = 5,),
+		widget.DF(
+			fmt='home {}',
+			measure='G',
+			format='({uf}{m}|{r:.0f}%)',
+			#format='{s}{m}/{f}{m}',
+			partition='/home',
+			visible_on_warn=False,
+			warn_color=YELLOW,
+			),
+		#widget.KeyboardLayout(),
+		],
+		30,
+	)
 							
-screens = [ Screen(top=top) ]#,bottom=bottom), ]
+screens = [ Screen(top=top,bottom=bottom), ]
 
 
 # Drag floating layouts.
