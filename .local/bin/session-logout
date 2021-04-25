@@ -7,9 +7,13 @@ session=$(echo $DESKTOP_SESSION | cut -d'/' -f5)
         i3exit logout
         ;;
     "dwm")
-	sleep 1;
-	killall dwm
-	;;
+		sleep 1;
+		killall dwm
+		;;
+    "awesome")
+		sleep 1;
+		killall awesome
+		;;
     "bspwm")
         sleep 1;
         bspc quit
